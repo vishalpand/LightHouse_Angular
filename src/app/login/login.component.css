@@ -1,0 +1,82 @@
+
+
+.background-container {
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Add this line to hide overflow */
+}
+
+
+
+
+.container {
+	width: 400px;
+	height: 500px;
+	border-radius: 20px;
+	padding: 20px 20px 20px 20px;
+	background-color: #ffffff;
+	border-width: 0px;
+	text-align: center;
+	opacity: .9;
+	/* border-style: none; *    /
+	border-color: #671f1f;
+	box-sizing: border-box;
+	/*   border: 25px solid grey; */
+	margin: 20px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.smallContainer {
+	width: 100%;
+	padding-top: 250px
+}
+
+.imageBox {
+	width: 100px;
+	height: 100px;
+	float: left;
+	margin-left: 50px;
+	background-color: white;
+}
+
+
+.TopLogo {
+	position: relative;
+	width: 111.5%;
+	border-top-left-radius: 20px;
+	border-top-right-radius: 20px;
+	height: 14%;
+	float: left;
+	margin-left: -20px;
+	margin-top: -20px;
+	background-color: #dc2829;
+}
+
+
+.text-center {
+	position: absolute;
+	top: -12px;
+	left: 25px;
+	font-size: 35px;
+	color: white;
+	font-family: 'Alegreya Sans';
+}
+
+
+.image {
+	background: white;
+	border-radius: 10px;
+	margin-left: 100px;
+	margin-top: 6%;
+}
+
+.imgcontainer {
+	text-align: center;
+	margin: 104px 0 12px 0;
+}
+

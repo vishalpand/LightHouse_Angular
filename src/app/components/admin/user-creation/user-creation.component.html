@@ -1,0 +1,298 @@
+<div style="overflow-y: hidden;">
+
+    <div class="accordion" id="accordionExample" style="padding-top: 40px;">
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button text-center"
+                    style="background-color: rgb(215, 25, 85);color: white; font-weight: bold; font-size: large;" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true"
+                    aria-controls="collapseOne">
+                    User Creation
+                </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                <div class="accordion-body" style="background-color:aliceblue;">
+                    <!-- <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow. -->
+                    <div class="btn_box">
+                        <button class="btn btn-primary" style="margin: 1mm;" (click)="openCreateUserModal()">Create
+                            User</button>
+                        <button class="btn btn-primary " style="margin: 1mm;" (click)="openShowUserModal()">Show
+                            User</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+    <!-- Create User Modal -->
+    <div class="modal" [ngClass]="{'show': isCreateUserModalOpen, 'fade': isCreateUserModalOpen}" tabindex="-1"
+        role="dialog" [ngStyle]="{'display': isCreateUserModalOpen ? 'block' : 'none'}">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Create User</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        (click)="closeCreateUserModal()"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Your form content goes here -->
+                    <div class="mb-3">
+                        <label for="fullName" class="form-label mandatory">User Name</label>
+                        <input type="text" class="form-control" id="userName" [(ngModel)]="usercretion.userName"
+                            required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="userId" class="form-label mandatory">User ID</label>
+                        <input type="text" class="form-control" id="userId" [(ngModel)]="usercretion.userId" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="userEmail" class="form-label mandatory">User Email</label>
+                        <input type="email" class="form-control" id="userEmail" [(ngModel)]="usercretion.emailid"
+                            required>
+                    </div>
+                    <!-- <div class="mb-3">
+                        <label for="clientName" class="form-label mandatory">Client Name</label>
+                        <input type="text" class="form-control" id="clientName" [(ngModel)]="usercretion.clientname"
+                            required>
+                    </div> -->
+                    <div class="mb-3">
+                        <label for="password" class="form-label mandatory">Password</label>
+                        <input type="password" class="form-control" id="password" [(ngModel)]="usercretion.passWord"
+                            required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="userRole" class="form-label mandatory">User Role</label>
+                        <select class="form-select" id="userRole" required [(ngModel)]="usercretion.role">
+                            <option selected disabled value="">Select User Role</option>
+                            <option value="admin">Admin</option>
+                            <option value="user">User</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="appName" class="form-label mandatory">Application Name</label>
+                        <br>
+                        <input type='checkbox' id="selectAll" (change)="selectAll($event)">
+                        <label for="selectAll">Select All</label>
+                        <div class="selected-option-container">
+                            <div class="selected-option" *ngFor="let option of selectedOptions"
+                                (click)="removeOption(option)">
+                                {{ option }}
+                                <span class="delete-option" (click)="removeOption(option)">x</span>
+                            </div>
+                            <select  class="form-control" id="applist" name="app" (change)="selectMultiple($event)">
+                                <option value="" selected disabled>Select</option>
+                                <option  
+                                    *ngFor="let applist of applicationList" [value]="applist" [ngClass]="{'selected-background': isSelected(applist), 'unselected-background': !isSelected(applist)}">{{ applist }}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="appType" class="form-label mandatory">Application Type</label>
+                        <select class="form-select" id="appType" [(ngModel)]="usercretion.appType" required>
+                            <option value="">Select Application Type</option>
+                            <option value="web">Web</option>
+                            <option value="mobile">Mobile</option>
+                           
+                        </select>
+                    </div>
+                    <button type="submit" (click)="createUser()" class="btn btn-primary">Submit</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!-- Upadte User Modal -->
+    <div class="modal" [ngClass]="{'show': isUpdateModalOpen, 'fade': isUpdateModalOpen}" tabindex="-1" role="dialog"
+        [ngStyle]="{'display': isUpdateModalOpen ? 'block' : 'none'}">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Update User</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        (click)="updatecloseUserModal()"></button>
+                </div>
+               
+               <h5 class="m-3"> User Details Form</h5>
+                <div class="modal-body">
+                    <!-- Your form content goes here -->
+                    <div class="div">
+                        <div class="mb-3">
+                            <label for="fullName" class="form-label mandatory">User Name</label>
+                            <input type="text" class="form-control" id="userName" [(ngModel)]="usercretion.userName"
+                                required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="userId" class="form-label mandatory">User ID</label>
+                            <input type="text" class="form-control" id="userId" [(ngModel)]="usercretion.userId" readonly >
+                        </div>
+                        <div class="mb-3">
+                            <label for="userEmail" class="form-label mandatory">User Email</label>
+                            <input type="email" class="form-control" id="userEmail" [(ngModel)]="usercretion.emailid"
+                                required>
+                        </div>
+                      
+                        <div class="mb-3">
+                            <label for="userRole" class="form-label mandatory">User Role</label>
+                            <select class="form-select" id="userRole" required [(ngModel)]="usercretion.role">
+                                <option selected disabled value="">Select User Role</option>
+                                <option value="admin">Admin</option>
+                                <option value="user">User</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="appName" class="form-label mandatory">Application Name</label>
+                            <br>
+                            <input type='checkbox' id="selectAll" (change)="selectAll($event)">
+                            <label for="selectAll">Select All</label>
+                            <div class="selected-option-container">
+                                <div class="selected-option" *ngFor="let option of selectedOptions"
+                                    (click)="removeOption(option)">
+                                    {{ option }}
+                                    <span class="delete-option" (click)="removeOption(option)">x</span>
+                                </div>
+                                <select class="form-control" id="applist" name="app" (change)="selectMultiple($event)">
+                                    <option value="" selected disabled>Select</option>
+                                    <option style="background-color: rgb(183, 98, 98);"
+                                        *ngFor="let applist of applicationList" [value]="applist">{{ applist }}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="appType" class="form-label mandatory">Application Type</label>
+                            <select class="form-select" id="appType" [(ngModel)]="usercretion.appType" required>
+                                <option value="">Select Application Type</option>
+                                <option value="web">Web Application</option>
+                                <option value="mobile">Mobile Application</option>
+                            </select>
+
+
+                        </div>
+                    </div>
+                    <button type="submit" (click)="UpdateUser()" class="btn btn-primary">Submit</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!-- Show User Modal -->
+    <div class="modal" [ngClass]="{'show': isShowUserModalOpen, 'fade': isShowUserModalOpen}" tabindex="-1"
+        role="dialog" [ngStyle]="{'display': isShowUserModalOpen ? 'block' : 'none'}">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" style="padding-bottom: 8px;" id="showUserModalLabel">Show Users</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        (click)="closeShowUserModal()"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3 d-flex inline">
+
+
+                        <!-- Search input -->
+                        <label style="padding-top: 2mm; padding-right:2mm;">Search:-</label>
+                        <input type="text" class="form-control" style="width: 40%;" placeholder="Search..."
+                        [(ngModel)]="filterValue" (input)="applyFilter()">
+                    </div>
+                    <div class="tableResponsive" style="max-height: 400px; overflow-y: auto;">
+                        <!-- Table to display user details -->
+                        <table class="table table-striped DetailTbl">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Employee ID</th>
+                                    <th scope="col">Employee Name</th>
+                                    <th scope="col">User Role</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!--  Example: Table rows with user data will be dynamically populated here -->
+                             
+                                <!-- <tr *ngFor="let error of errorlist; let i = index"></tr> -->
+                                <tr  *ngFor="let users of getFilteredList;  let  i=index">
+                                    <td>{{users.user_id}}</td>
+                                    <td>{{users.user_name}}</td>
+                                    <td>{{users.role_id}}</td>
+                                    <td>
+                                        <button class="btn btn-success btn-sm" data-bs-toggle="modal" (click)="showModalperUser(users.user_id)">Show apps</button>
+                                        <button class="btn btn-primary btn-sm mx-1"
+                                            (click)="updateopenUserModal(users.user_id,users.user_name,users.mail_id,users.role_id)">Update</button>
+                                        <button class="btn btn-danger btn-sm"   (click)="deleteUser(users.user_id)">Delete</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                        (click)="closeShowUserModal()">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="modal" [ngClass]="{'show': isShowModalOpenperuser, 'fade': isShowModalOpenperuser}" tabindex="-1"
+    role="dialog" [ngStyle]="{'display': isShowModalOpenperuser ? 'block' : 'none'}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" style="padding-bottom: 8px;" id="showUserModalLabel">User :{{applicationperUser}}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                    (click)="closeModalperUser()"></button>
+            </div>
+            <div class="modal-body">
+                <div class="tableResponsive" style="max-height: 350px; overflow-y: auto;">
+                    <!-- Table to display user details -->
+                    <table class="table table-striped perUserTD">
+                        <thead>
+                            <tr>
+                                <th scope="col">Sr No</th>
+                                <th scope="col">Application Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr  *ngFor="let users of apllicationlistperUser;  let  i=index">
+                                <td>{{i+1}}</td>
+                                <td>{{users}}</td>
+                            </tr>
+                            <tr *ngIf="!apllicationlistperUser || apllicationlistperUser.length === 0">
+                                <td colspan="2" class="text-center">
+                                    <p style="color: black; margin: 0;">No data available..!!</p>
+                                </td>
+                            </tr>  
+
+                        </tbody>
+                    </table>
+                </div>
+               
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                    (click)="closeModalperUser()">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+   
+</div>
+

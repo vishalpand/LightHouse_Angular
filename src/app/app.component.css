@@ -1,0 +1,291 @@
+.text-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: white;
+    display: flex;
+    align-items: center;
+}
+
+
+.openbtn {
+  cursor: pointer;
+    font-size: 20px;
+    cursor: pointer;
+    background-color: #111;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    position: fixed;
+    top: 0;
+    left: 0px;
+    z-index: 1100; 
+}
+
+.custom-alert {
+  position: fixed;
+  top: 50px;
+  right: 0;
+  color: white;
+  width: 300px; /* Adjust the width as needed */
+  z-index: 1050;
+  transition: right 0.5s ease-in-out, opacity 0.5s ease-in-out;
+  opacity: 1;
+  background-color: rgb(52, 27, 27);
+}
+
+.custom-alert.ng-enter {
+  right: -300px; /* Start off-screen */
+  opacity: 0;
+}
+
+.custom-alert.ng-enter-active {
+  right: 20px; /* Move to visible position */
+  opacity: 1;
+}
+
+.custom-alert.ng-leave {
+  right: 20px; /* Start from visible position */
+  opacity: 1;
+}
+
+.custom-alert.ng-leave-active {
+  right: -300px; /* Move off-screen */
+  opacity: 0;
+}
+
+
+
+
+
+
+
+
+.centered1 {
+    font-size: 20px;
+    cursor: pointer;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    position: fixed;
+    top: 0;
+    right: 7px; 
+    z-index: 1100; 
+}
+
+.logout {
+	font-family: sans-serif !important;
+	float: right;
+	margin-right: -9%;
+	font-size: 15px;
+}
+
+.profile:hover{
+	background-color:blue;
+	color:white;
+}
+
+
+.modal-body1 {
+	height: 47vh !important;
+	/* overflow-y: auto; */
+}
+
+body {
+    font-family: "Lato", sans-serif;
+}
+
+.sidebar {
+  height: calc(100% - 50px);
+  width: 49px; /* Adjusted initial width */
+  position: fixed;
+  z-index: 1;
+  top: 50px;
+  left: 0;
+  overflow-x: hidden;
+  background-color: #111;
+  overflow-y: auto;
+  transition: 0.5s;
+  padding-top: 10px;
+ 
+}
+
+.sidebar a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 15px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+    padding-left: 15px;
+    font-weight: bold;
+}
+
+.sidebar a:hover {
+    color: #ee0e0e;
+
+}
+
+.sidenav:hover {
+  width: 200px;
+}
+
+.sidenav:hover ~ .main {
+  margin-left: 200px; /* Same as the expanded width of the sidebar */
+  width: calc(100% - 200px);
+}
+
+
+.openbtn:hover {
+    background-color: #444;
+}
+
+  /* #main {
+    transition: margin-left .5s; 
+    padding: 16px; 
+
+    margin-left: 49px;
+  
+    width: calc(100% - 49px);
+  } */
+  
+  #main {
+    /* transition: margin-left .5s; */
+    padding: 16px;
+    width: 100%;
+    overflow-x: hidden;
+    margin-left: 49px;
+    width: calc(100% - 49px);
+    font-family: "Lato", sans-serif;
+  }
+  
+  .logged-in {
+    margin-left: 49px;
+    width: calc(100% - 49px);
+  }
+  
+  #main.not-logged-in {
+    margin-left: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    width: 100%;
+    position: fixed;
+  }
+  
+
+
+
+@media screen and (max-height: 450px) {
+    .sidebar {
+        padding-top: 15px;
+    }
+    .sidebar a {
+        font-size: 18px;
+    }
+    #logout {
+      float: right;
+      margin-right: 3%;
+      font-size: 9px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.dropbtn {
+     color: white;
+     margin:10px; 
+     font-size: 15px;
+    cursor: pointer;
+  }
+  
+  /* Dropdown button on hover & focus */
+  .dropbtn:hover, .dropbtn:focus {
+    background-color: #3e8e41;
+  }
+  
+  /* The container <div> - needed to position the dropdown content */
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  /* Dropdown Content (Hidden by Default) */
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #ec1414;
+    padding: 3px 4px;
+    /* min-width: 50px; */
+    text-wrap: nowrap;
+    /* box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); */
+    /* z-index: 1; */
+  }
+  
+  /* Links inside the dropdown */
+  .dropdown-content a {
+    color: rgb(249, 242, 242);
+    padding: 3px 4px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  /* Change color of dropdown links on hover */
+  .dropdown-content a:hover {background-color: #0a4193;}
+  
+  /* Show the dropdown menu on hover */
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  
+  /* Change the background color of the dropdown button when the dropdown content is shown */
+  .dropdown:hover .dropbtn {
+    background-color: #171313;
+  }
+
+
+
+ /* Add this to your component's CSS file, such as app.component.css */
+.glow {
+  font-style: oblique;
+  /* font-family: serif; */
+
+  font-size: 97%;
+  margin-top: -15%;
+  margin-right: -72%;
+  color: #f33b3b;
+  text-align: center;
+  -webkit-animation: glow 1s ease-in-out infinite alternate;
+  -moz-animation: glow 1s ease-in-out infinite alternate;
+  animation: glow 1s ease-in-out infinite alternate;
+  animation-delay: 1s;
+}
+
+@-webkit-keyframes glow {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;
+  }
+  to {
+    text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6, 0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
+  }
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;
+  }
+  to {
+    text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6, 0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
+  }
+}
+
+  

@@ -1,0 +1,90 @@
+<div class="background-container" style="background-image: url('assets/image/login_bkgrnd_img.jpg');width: 100%;">
+
+
+
+  <form id="loginForm" name="user">
+    <div class="imgcontainer"></div>
+    <div class="container">
+      <div class="TopLogo">
+        <div class="text-center">
+          <img alt="" src="assets/image/apmLogo.jpg" class="image" width="150px" height="55px">
+
+        </div>
+      </div>
+      <div class="imageBox">
+        <img alt="" src="assets/image/light_house.jpeg" width="130px" height="80px"
+          style="margin-left: -100px;margin-top: 66%;">
+        <!-- <br> -->
+        <h5 style="color: #dc2829; width: 300px;margin-left: 29px;margin-top: -47%;">Light House Portal</h5>
+        <!-- <h3 style="color: #dc2829; width: 300px; margin-left: 50px">Portal</h3> -->
+
+      </div>
+
+
+
+      <div class="smallContainer">
+        <div id="loginMessage"></div>
+
+        <input id="loginUsername" class="form-control" type="text" placeholder="Enter Username" name="username"
+          [(ngModel)]="loginForm.user_id" required style="margin-bottom: 7px;" />
+
+        <input type="password" id="loginPassword" class="form-control" placeholder="Enter Password" name="password"
+          [(ngModel)]="loginForm.password" required style="margin-bottom: 10px;" />
+
+        <button type="submit" id="loginButton" class="btn btn-danger btn-lg" style="width: 350px;"
+          (click)="login()">Login</button>
+        <div class="forgotPassword" data-toggle="modal" (click)="openOTPModal()"
+          style="color: red;cursor: pointer;text-decoration-line: underline;">Forgot Password</div>
+
+        <div>
+          <font color="red"></font>
+        </div>
+      </div>
+    </div>
+
+
+  </form>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+<!-- Bootstrap Modal for OTP -->
+<div class="modal" #otpModal tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="otpModalLabel">Forgot Password</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="closeOTPModal()"
+          aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="otp" class="form-label">EmailId</label>
+            <input type="text" class="form-control" id="otp" placeholder="Enter EmailId" />
+          </div>
+          <button type="submit" class="btn btn-primary">Send OTP</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <ngx-spinner type="ball-scale-multiple"></ngx-spinner> -->
+
+<ngx-spinner
+  bdColor="rgba(51,51,51,0.8)"
+  size="medium"
+  color="#fff"
+  type="ball-scale-multiple"
+>
+  <p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>

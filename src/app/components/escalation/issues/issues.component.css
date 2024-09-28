@@ -1,0 +1,66 @@
+
+.reportErr_header {
+    width: 100%;
+    height: 39px;
+    background-color: rgb(96, 93, 93);
+    margin-left: 2mm;
+    margin-top: 5mm;
+    color: rgb(253, 253, 253);
+    font-size: medium;
+}
+
+.center-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Report_errorTbl {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 5mm;
+}
+
+.Report_errorTbl td,
+th {
+    border: 1px solid #dddddd;
+    text-align: center;
+    padding: 6px;
+    background-color: rgb(244, 250, 250);
+    /*   white-space: nowrap;  This can restrict sentence from break down into several rows*/
+}
+
+.Report_errorTbl td{
+    font-size: 12px;
+}
+
+.Report_errorTbl th {
+    background: #b80000;
+    color: white;
+    padding: 0mm;
+    font-size: 14px;
+}
+
+
+
+.btnlevel{
+    background-color: lightgray;
+    color: black;
+    border: 1px solid black;
+    padding: 5px 10px;
+    margin-right: 5px;
+}
+
+.success-active {
+    color: #fff; /* white */
+    background-color: #198754; /* green */
+    border-color: #198754; /* green */
+  }
+  
+  .basic-disabled {
+    background-color: lightgray;
+    color: black;
+    pointer-events: none;
+    opacity: 0.6;
+  }

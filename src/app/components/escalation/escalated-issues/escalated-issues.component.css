@@ -1,0 +1,91 @@
+
+
+
+.summaryHeading {
+    font-family: Arial, sans-serif;
+    width: 100%;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+.form-container {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.form-item {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+}
+
+.form-item label {
+    font-weight: bold;
+    color: #030303;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.info_detail table {
+    margin-top: 3mm;
+    margin-left: 2mm;
+    font-family: arial, sans-serif;
+    width: 97vw;
+    border-collapse: collapse;
+    text-align: center;
+    padding: 5px;
+
+}
+
+.info_detail th,
+td {
+
+    border: 1px solid #dddddd;
+    /* Add border to the left side of cells */
+    text-align: center;
+    padding: 15px;
+}
+
+.info_detail td label {
+    font-weight: bold;
+    color: #030303;
+}
+
+
+.ReportTable {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+
+    margin-top: 4mm;
+
+}
+
+.ReportTable td,
+th {
+    border: 1px solid #dddddd;
+    text-align: center;
+    padding: 6px;
+    /*   white-space: nowrap;  This can restrict sentence from break down into several rows*/
+}
+
+.ReportTable th {
+    background: #b80000;
+    color: white;
+    padding: 4mm;
+    font-size: small;
+}

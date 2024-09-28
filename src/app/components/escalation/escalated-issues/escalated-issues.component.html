@@ -1,0 +1,157 @@
+<div style="padding-top: 40px;">
+
+
+    <div class="summaryHeading">
+        <div class="form-container">
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="form-item">
+                        <label style="text-align: center;">Application</label>
+                        <select class="form-control down" [(ngModel)]="appName" >
+                            <option value="" selected disabled>Select</option>
+                            <option *ngFor="let application of applicationList" [value]="application">{{ application }}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="col-md-2">
+                    <div class="form-item">
+                        <label style="text-align: center;">Start Date</label>
+                        <input type="date" id="fromDate" class="form-control down" [(ngModel)]="startDate" [max]="toDayDate" placeholder="yyyy-mm-dd" required>
+                        <!-- <input type="time" id="startdatetime" class="form-control down" value="00:00" data-ng-model="startDateTime" step="1" data-ng-disabled="monthEnd" /> -->
+                    </div>
+                </div>
+
+
+                <div class="col-md-2">
+                    <div class="form-item">
+                        <label style="text-align: center;">Select Start Time</label>
+                        <!-- <input type="date" id="fromDate" class="form-control down" [max]="toDayDate" placeholder="yyyy-mm-dd" required> -->
+                        <input type="time" id="startdatetime" class="form-control down" value="00:00" [(ngModel)]="STime"  step="1" data-ng-disabled="monthEnd" />
+                    </div>
+                </div>
+
+
+                <div class="col-md-2">
+                    <div class="form-item">
+                        <label style="text-align: center;">End Date</label>
+                        <input type="date" id="fromDate" class="form-control down" [(ngModel)]="endDate"  placeholder="yyyy-mm-dd" required>
+                        <!-- <input type="time" id="startdatetime" class="form-control down" value="00:00" data-ng-model="startDateTime" step="1" data-ng-disabled="monthEnd" /> -->
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="form-item">
+                        <label style="text-align: center;">Select End Time</label>
+                        <!-- <input type="date" id="fromDate" class="form-control down" placeholder="yyyy-mm-dd" required> -->
+                        <input type="time" id="startdatetime" class="form-control down" value="00:00" [(ngModel)]="Etime" step="1" data-ng-disabled="monthEnd" />
+                    </div>
+                </div>
+
+                
+                <div class="col-md-2">
+                    <div class="form-item">
+                        <label style="margin-bottom: 17px;"></label>
+                        <button type="button" class="btn btn-secondary btm-sm custom-btn" (click)="getEscalatedReport()" style="background-color: #b80000; border-color:#b80000;">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<hr>
+
+    <div class=" ms-3 mt-4 d-flex">
+        <div class="inline">
+            <p><span class=" me-2"><b>Solved Error Details:-</b></span>All</p>
+
+
+        </div>
+        <div class="ms-auto inline mb-4">
+            <button class="btn mx-1" style="background-color: brown; color: white;" (click)="currentIssue()">Current Issues</button>
+            <button class="btn " style="background-color: brown; color: white;" (click)="skkipedIssue()">Solved Issues</button>
+            <button class="btn mx-1 me-4 " style="background-color: brown; color: white;" (click)="solvedIssue()">Skipped Issues</button>
+        </div>
+    </div>
+
+    <div class="d-flex mt-1 ms-3">
+        <label class="inline me-2">Show</label>
+
+        <select class="form-select-sm inline me-2" (change)="setPageSize($event)">
+            <option selected disabled value="">select</option>
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="20">20</option>
+        </select>
+
+        <div class="ms-auto me-4"> <!-- Use ms-auto class to push elements to the right -->
+            <label class="inline me-2"><b>Search:</b></label>
+            <input type="text" placeholder="search here.." (input)="onSearchChange($event)"/>
+        </div>
+    </div>
+
+    <div>
+        <h6 class="mt-4 ms-3"><b>Entries</b></h6>
+        <div style="margin-left: 3mm;margin-right:7mm">
+            <table class="ReportTable">
+                <thead>
+                    <tr>
+                        <th>Application Name</th>
+                        <th>Page Name</th>
+                        <th> Start Time</th>
+                        <th>Level</th>
+                        <th>Escalated Time </th>
+                        <th>Escalated By </th>
+                        <th>Report To</th>
+                        <th>End Time</th>
+                        <th>Error Description</th>
+                        <th>Screenshot</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr  *ngFor="let escalateAll of escalatedIssueAlllist;  let  i=index">
+
+                       <td>{{escalateAll.app_Name}}</td>
+                       <td>{{escalateAll.page_Name}}</td>
+                       <td>{{escalateAll.start_Time}}</td>   
+                       <td>{{escalateAll.level}}</td> 
+                       <td>{{escalateAll.createdOn}}</td> 
+                       <td>{{1}}</td>
+                       <td>{{escalateAll.createdOn}}</td> 
+                       <td>{{escalateAll.createdOn}}</td> 
+                       <td>{{111}}</td> 
+                       <td>{{escalateAll.comments}}</td> 
+                       
+
+
+                      
+                    </tr>
+                    <tr *ngIf="!escalatedIssueAlllist || escalatedIssueAlllist.length === 0">
+                        <td style="color: #3c9b4e;" colspan="10">No Data Available in Table</td>
+                    </tr>
+
+                    <!-- <tr>
+                        <td>BG_Insurance_Maker</td>
+                        <td>Home page</td>
+                        <td>10.03.2024 10:30:45</td>
+                        <td>2.6</td>
+                        <td>8.50</td>
+                        <td>677</td>
+                        <td>677</td>
+                        <td>10.03.2024 11:30:45</td>
+                        <td>3.50</td>
+                        <td>99% </td>
+                    </tr> -->
+                </tbody>
+            </table>
+        </div>
+        <div class="pagination-controls">
+            <button (click)="currentPage = currentPage - 1" [disabled]="currentPage === 1">Previous</button>
+            <span>Page {{ currentPage }}</span>
+            <button (click)="currentPage = currentPage + 1" [disabled]="currentPage * pageSize >= filteredList.length">Next</button>
+        </div>
+    </div>
+
+ 
+       
+</div>

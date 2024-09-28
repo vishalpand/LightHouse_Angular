@@ -1,0 +1,50 @@
+
+.heading {
+    margin-top: 20px;
+    color: antiquewhite;
+    padding-top: 12px;
+    font-weight: 550;
+    background-color: rgb(209, 16, 116);
+    width: 98%;
+    height: 45px;
+    border-color: azure;
+    border-width: 5mm;
+
+
+}
+
+.form-group {
+    margin-bottom: 15px;
+    
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 60px;
+    /* Align forms at the start and end of the container */
+}
+
+.form-container {
+    flex: 0 0 48%;
+    /* Set width for each form container */
+}
+
+
+.caret-container {
+    position: absolute;
+    right: 10px;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+}
+
+.caret {
+    color: black; /* Customize the color if needed */
+}
+
+
+  
+
+

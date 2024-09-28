@@ -1,0 +1,243 @@
+<div style=" overflow-x: hidden; padding-top: 30px;">
+ 
+    <div class="header d-flex">
+        <h5 style="padding-top: 4px;">&nbsp; >>Add Escalation</h5>
+    </div>
+    <div>
+        <div class="row my-4">
+            <div style="margin-top: 1%;" class="col-sm-2">
+                <span style="font-size: initial;padding-left:6mm" class="required">User Name :</span>
+            </div>
+            <div class="col-sm-3 ">
+                <select id="userName" class="form-select" [(ngModel)]="AdduserDetails.userName" 
+                    required>
+                    <option value="aa" disabled selected>--Select--</option>
+                    <option *ngFor="let user of getAlluserList; let i=index"  [value]="user[0]">{{user[0]}}</option>
+                </select>
+
+                <!-- <select class="form-control" name="conatactName" id="conatact-id"  (change)="getEmailbytheUser($event)"
+                this.escalatepayload.contactName >
+                <option value="" disabled selected>---Select----</option>
+                <option *ngFor="let contactName of nameslist; let i=index"  [value]="i">{{ contactName }}
+                </option>
+            </select> -->
+
+            </div>
+        </div>
+        <div class="row my-5">
+            <div style="margin-top: 1%;" class="col-sm-2">
+                <span style="font-size: initial;padding-left:6mm" class="required">Application Name :</span>
+            </div>
+            <div class="col-sm-3 ">
+                <select id="userName" class="form-select"  [(ngModel)]="AdduserDetails.appName" (ngModelChange)="getAllpage(AdduserDetails.appName)"
+                    required>
+                    <option value="aa" disabled selected>--Select--</option>
+                    <option *ngFor="let user of applicationList"  [value]="user">{{user}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="row my-4">
+            <div style="margin-top: 1%;" class="col-sm-2">
+                <span style="font-size: initial;padding-left:6mm" class="required">Page Name :</span>
+            </div>
+            <div class="col-sm-3 ">
+                <select id="userName" class="form-select" (ngModelChange)="getEscalationdetails($event)" [(ngModel)]="AdduserDetails.pages"
+                    required>
+                    <option value="aa" disabled selected>--Select--</option>
+                    <option *ngFor="let page of pageList"  [value]="page[1]">{{page[1]}}</option>
+                </select>
+            </div>
+        </div>
+       
+        <div class="row my-4">
+            <div style="margin-top: 1%;" class="col-sm-2">
+                <span style="font-size: initial;padding-left:6mm" class="required">Escalation Level :</span>
+            </div>
+            <div class="col-sm-3 ">
+                <select id="userName" class="form-control"  disabled [(ngModel)]="AdduserDetails.levels"
+                    required>
+                    <option value="aa" disabled selected>--Select--</option>
+                    <option selected disabled value="1">1</option>
+                </select>
+            </div>
+        </div>
+        <div class="row my-5">
+            <div style="margin-top: 1%;" class="col-sm-2"  >
+                <span style="font-size: initial ;padding-left:6mm;" class="required">Error
+                    Description</span>
+            </div>
+            <div class="col-sm-3">
+                <input type="text" id="errorDescription" class="form-control" placeholder="Comments"
+                [(ngModel)]="AdduserDetails.comments" />
+            </div>
+        </div>
+        <div class="row my-5">
+            <div style="margin-top: 1%;" class="col-sm-2">
+                <span style="font-size: initial;padding-left:6mm" class="required">Via :</span>
+            </div>
+            <div class="col-sm-3 ">
+                <select id="userName" class="form-select" required     [(ngModel)]="AdduserDetails.via">
+                    <option selected [value]="AdduserDetails.via">Email</option>
+                </select>
+            </div>
+        </div>
+        <div class="row my-4">
+            <div style="margin-top: 1%;" class="col-sm-2">
+                <span style="font-size: initial;padding-left:6mm" class="required">Reported To :</span>
+            </div>
+            <div class="col-sm-3 ">
+                <select id="userName" class="form-select" (ngModelChange)="getEmailbytheUser($event)" [(ngModel)]="AdduserDetails.reportedTo" required>
+                    <option value="aa" disabled selected>--Select--</option>
+                    <option *ngFor="let name of nameslist; let i=index" [value]="name">{{name}}</option>
+                  </select>
+                  
+            </div>
+        </div>
+
+
+        <button class="btn ms-3 mb-3" style="background-color: brown; color: white;" (click)="checkifEscalationExits()" >Continue</button>
+
+
+    </div>
+
+    <div class="header">
+        <h5 style="padding-top: 4px;"> &nbsp; >>Added Issues </h5>
+    </div>
+
+    <div class=" ms-4 mt-4 d-flex">
+        <div class="inline">
+            <label class=" me-2"><b>Search:-</b></label>
+            <input type="text" placeholder="search here.." />
+        </div>
+        <div class="ms-auto inline mb-4">
+            <button class="btn mx-1" style="background-color: brown; color: white;">Current Issues</button>
+            <button class="btn " style="background-color: brown; color: white;">Solved Issues</button>
+            <button class="btn mx-1 me-3 " style="background-color: brown; color: white;">Skipped Issues</button>
+        </div>
+    </div>
+
+    <div style="margin-left:8px;margin-right:7mm;margin-bottom:1cm; ">
+        <table class="issue_tbl">
+            <thead>
+                <tr>
+                    <th>Application Name</th>
+                    <th>Page Name</th>
+                    <th> Start Time</th>
+                    <th>Level</th>
+                    <th>Error Description</th>
+                    <th>Screenshot</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr *ngIf="!addraisedEscaltionlist || addraisedEscaltionlist.length === 0">
+                    <td colspan="10" class="text-success">NO ERROR OBSERVED</td>
+                  </tr>
+                  <tr *ngFor="let addraise of addraisedEscaltionlist; let i = index">
+                    <td>{{addraise[0]}}</td>
+                    <td>{{addraise[1]}}</td>
+                    <td>{{addraise[2]}}</td>
+                    <td>{{addraise[3]}}</td>
+                    <td>{{addraise[4]}}</td>
+                    <td><i
+                        class="fas fa-eye"
+                        style="font-size: 20px"
+                        (click)="getScreenShot(addraise[5])"
+                      ></i>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+<div class="modal fade" id="screenshotModal" [ngClass]="{'show': isSreenshotmodal, 'fade': isSreenshotmodal}"
+    tabindex="-1" role="dialog" [ngStyle]="{'display': isSreenshotmodal ? 'block' : 'none'}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" style="
+            margin-left: 5%;
+            font-size: 25;
+            /* font-weight: bold; */
+          "> <span>Screenshot Preview </span>
+
+                </h4>
+                <button type="button" class="btn-close" (click)="isCurrentclosemodal()" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-body">
+                    <img [src]="screenshotUrl" alt="Screenshot" class="img-fluid">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning" (click)="isCurrentclosemodal()">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<div class="modal fade" id="sentMailId" [ngClass]="{'show': isEmailmodalopen, 'fade': isEmailmodalopen}" tabindex="-1"
+    role="dialog" [ngStyle]="{'display': isEmailmodalopen ? 'block' : 'none'}">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" style="
+            margin-left: 5%;
+            font-size: 13px;
+           
+          "> <span>Email</span>
+
+                </h4>
+                <button type="button" class="btn-close" (click)="emailmododalclose()" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">To</label>
+                        <input type="text" class="form-control"  [(ngModel)]="selectEmailbyuser" readonly  id="recipient-name">
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">CC</label>
+                        <!-- <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea> -->
+                        <input type="text" class="form-control" [(ngModel)]="emailccdetailslist" id="recipient-name">
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Subject</label>
+                        <input type="text" class="form-control" [(ngModel)]="subjectdata" id="recipient-name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message-text" class="col-form-label">Body</label>
+                        <textarea class="form-control" [(ngModel)]="bodydata" id="message-text"></textarea>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="file" class="col-form-label">Upload File:</label> 
+                            <input type="file" class="form-control-file" id="file" name="file" (change)="onFileSelected($event)" > 
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" (click)="saveEmailData()" >
+                    Send
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

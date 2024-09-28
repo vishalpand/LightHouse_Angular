@@ -1,0 +1,98 @@
+.body-cover{
+background-image: url("../images/bg-img-new.jpg");
+background-repeat: no-repeat;
+background-size: cover;
+position: absolute;
+width: 100%;
+height: 100%;
+z-index:-1;
+opacity: 0.7;
+}
+.panel{
+	/* width: 25%;
+    left: 36%;
+    top: 18vh;
+    position: absolute; */
+    width: 67%;
+    left: 10%;
+    border-width: 1px;
+    border-color: #ad265e;
+}
+ .panel-primary>.panel-heading{
+	border-color:#a92c60;
+	background-image: linear-gradient(to bottom,#a92c60 0,#b31d5c 100%);
+	background-image:-webkit-gradient(linear,left top,left bottom,from(#a92c60),to(#b31d5c));
+	background-image:-webkit-linear-gradient(top,#a92c60 0,#b31d5c 100%);
+}
+.btn-md:hover{
+  background-image: linear-gradient(to bottom,#a92c60 0,#561631 100%) !important;
+  background: transparent;	
+}
+.btn-md{
+	background: #b0225e;
+    border-color: #b0225e;
+}
+.panel-primary{
+	border-color: #a92c60 ; 
+}
+#logo{
+	 width: 95%;
+    height: 41px;
+    background: white;
+    border-radius: 7px;
+}
+.panel-heading{
+	    padding: 5px 23%
+}
+#logo-single img{
+    margin-left: 23%;
+    width: 50%;
+}
+.brand-logo img{
+    background: white;
+    width: 100%;
+    border-radius: 7px;
+    margin-top: 6px;
+}
+ .brand-logo{
+        width: 66%;
+    margin-left: 20px;
+ }
+ .menu-accordion a i{
+ font-size: 13px !important;
+ }
+ .label-filter{
+    display: block;
+   
+    border-radius: 5px;
+    /* text-align: center; */
+    margin-bottom: 2px;
+ }
+ .label-filter b{
+   color: black;
+ }
+ .label-filter-tag{
+     position: absolute;
+    margin-top: 27px;
+     color: #2c3b56;
+}
+.sub-btn{
+ position: absolute;
+    margin-top: 20px;
+}
+#transaction-ico{
+    width: 100%;
+    position: relative;
+    margin-bottom: 5px;
+ }
+.tag-heading{
+	padding:0;
+    font-weight: bold;
+}
+
+ 
+ 
+ 
+ 
+ 
+ 

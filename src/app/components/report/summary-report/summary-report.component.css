@@ -1,0 +1,60 @@
+.summaryHeading {
+    font-family: Arial, sans-serif;
+    width: 100%;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+.form-container {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.form-item {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+}
+
+.form-item label {
+    font-weight: bold;
+    color: #030303;
+}
+
+.form-select, .form-control, .btn {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.btn {
+    background-color: #b80000;
+    border-color: #b80000;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.summaryTbl {
+    font-family: Arial, sans-serif;
+    border-collapse: collapse;
+    margin-top: 5mm;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.summaryTbl td, .summaryTbl th {
+    border: 1px solid #dddddd;
+    text-align: center;
+    padding: 6px;
+}
+
+.summaryTbl th {
+    background: #b80000;
+    color: white;
+}
+
+.summaryTbl tr:nth-child(even) {
+    background-color: #dddddd;
+}

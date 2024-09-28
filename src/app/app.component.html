@@ -1,0 +1,237 @@
+<header *ngIf="isLoggedIn()" style="width: 100%; z-index: 1000; top: 0; position: fixed; width: 100%;">
+    <img src="assets/image/newimg.jpg" width="100%" height="50px" alt="Header Image">
+    <div class="text-overlay">
+        <b style="font-size: x-large; margin-left: 65px; margin-top: -32px;">ApMoSys</b>
+        <div>
+            <p style="font-size:xx-small; margin-left: -114px; margin-top: 38px;">ISO 9001:2015 Certified Company
+            </p>
+        </div>
+    </div>
+
+</header>
+
+
+
+<!-- *ngIf="isUserLogged=='Y'" -->
+
+<!-- <div *ngIf="isLoggedIn()"  class="centered1">
+        <div class='centered greet'>
+            <span class="logout" id="logout">
+                <div class="dropdown">
+                    <a class="dropbtn"><i class="fa fa-user"></i> {{user_name}}</a>
+                    <div class="dropdown-content">
+                        <a (click)="openProfilemodal()" data-bs-toggle="modal" data-bs-target="#profilepage"><i
+                                class="fa fa-user"></i>Profile</a>
+                        <a (click)="logout()"><i class="fa fa-sign-out"></i>Logout</a>
+                    </div>
+                </div>
+
+
+            </span>
+        </div>
+    </div> -->
+<div *ngIf="isLoggedIn()"  class="centered1">
+    <div class='centered greet'>
+        <span class="logout" id='logout'><a data-ng-click="logout()" style='color: white'>
+
+                <div class="dropdown">
+                    <a data-bs-toggle="dropdown"
+                        style='color: white; margin: 10px; font-size: 15px; text-decoration: none;'
+                        aria-expanded="false">
+                        <i class="fa fa-user"></i><b>
+                            {{user_name}}</b></a>
+                    <div class="dropdown-menu" style="  background-image: url('/assets/image/newimg.jpg');
+                                background-size: cover; 
+                                top: 32px;
+                                cursor: pointer;">
+                        <div class="profile" style="text-align: center; font-size: 15px;">
+                            <a style='color: white;' (click)="openProfilemodal()" data-bs-toggle="modal"
+                                data-bs-target="#profilepage">Profile <i class="fa fa-user"></i></a>
+
+                        </div>
+
+                        <div class="profile" style='color: white; text-align: center; font-size: 15px;'>
+                            <a (click)="logout()"> Logout <i class="fa fa-sign-out"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+            </a> </span>
+        <!-- <span class="logout1" id='logout1'>Last Login:{{lastLogin}} </span> -->
+
+
+    </div>
+
+</div>
+
+
+
+
+
+
+
+<div *ngIf="isLoggedIn()" id="mySidebar" class="sidebar" (mouseenter)="toggleNav()"
+    (mouseleave)="toggleNavMouseleave()">
+    <!-- Home link with click event to toggle sub-links -->
+    <a (click)="toggleSubLinksForHome()" data-toggle="collapse" aria-controls="homeSubLinks" style="cursor: pointer;"><i
+            class="fas fa-home" style="font-size: 23px;"></i> {{isIconHome}}</a>
+    <!-- Nested div with sub-links for Home -->
+    <div class="card card-body-mb" id="homeSubLinks" [hidden]="!showSubLinksForHome">
+        <a routerLink="ApmosysAngularMonitoringPortal/Dashboard">Dashboard</a>
+        <a routerLink="ApmosysAngularMonitoringPortal/superUserDashboard">Super Dashboard</a><h1 class="glow">NEW</h1>
+       
+        <!-- Add more sub-links as needed -->
+    </div>
+    <a (click)="toggleSubLinksForAdmin()" data-toggle="collapse" aria-controls="adminSubLinks"
+        style="cursor: pointer;"><i class="fas fa-user" style="font-size: 23px;"></i> {{isIconAdmin}}</a>
+    <div class="card card-body-mb" id="adminSubLinks" [hidden]="!showSubLinksForAdmin">
+        <a routerLink="ApmosysAngularMonitoringPortal/Dashboard/user">User Creation</a>
+        <a routerLink="ApmosysAngularMonitoringPortal/Dashboard/onbord">App OnBoarding</a>
+        <a routerLink="ApmosysAngularMonitoringPortal/Dashboard/addEscalationLevel">Add Escalation Level</a>
+        <a routerLink="ApmosysAngularMonitoringPortal/Dashboard/harstatus">Update HAR status</a>
+    </div>
+
+
+
+    <a (click)="toggleSubLinksForReport()" data-toggle="collapse" aria-controls="reportSubLinks"
+        style="cursor: pointer;"><i class="fas fa-chart-bar" style="font-size: 23px;"></i> {{isIconReport}}</a>
+    <div class="card card-body-mb" id="reportSubLinks" [hidden]="!showSubLinksForReport">
+        <a routerLink="ApmosysAngularMonitoringPortal/Dashboard/summaryReport">Summary Report</a>
+        <a routerLink="ApmosysAngularMonitoringPortal/Dashboard/performanceReport">Performance Report</a>
+        <a routerLink="ApmosysAngularMonitoringPortal/Dashboard/downTimeReport">DownTime Report</a>
+    </div>
+
+
+    <a (click)="toggleSubLinksForSupport()" data-toggle="collapse" aria-controls="supportSubLinks"
+        style="cursor: pointer;"><i class="fas fa-life-ring" style="font-size: 23px;"></i> {{isIconSupport}}</a>
+    <div class="card card-body-mb" id="supportSubLinks" [hidden]="!showSubLinksForSupport">
+        <a routerLink="ApmosysAngularMonitoringPortal/Dashboard/downTimeapp">Scheduled DownTime</a>
+    </div>
+
+
+    <a (click)="toggleSubLinksForEscalation()" data-toggle="collapse" aria-controls="escalationSubLinks"
+        style="cursor: pointer;"><i class="fas fa-table" style="font-size: 23px;"></i> {{isIconEscalation}}</a>
+    <div class="card card-body-mb" id="escalationSubLinks" [hidden]="!showSubLinksForEscalation">
+        <!-- <a routerLink="ApmosysAngularMonitoringPortal/Dashboard/escalationReport">Escalated Isuues</a> -->
+        <a routerLink="ApmosysAngularMonitoringPortal/Dashboard/report_error">Current Issues</a>
+        <a routerLink="ApmosysAngularMonitoringPortal/Dashboard/solved_error">Solved Issues</a>
+        <a routerLink="ApmosysAngularMonitoringPortal/Dashboard/skipped_error">Skipped Issues</a>
+        <a routerLink="ApmosysAngularMonitoringPortal/Dashboard/addEscalation">Add/Raise Escalation</a>
+
+    </div>
+</div>
+
+
+<!-- 
+    <div id="main">
+        <button *ngIf="isLoggedIn()"  class="openbtn" (click)="toggleNav()">☰</button>
+        <router-outlet></router-outlet>
+    </div> -->
+
+<div [ngClass]="{'logged-in': isLoggedIn(), 'not-logged-in': !isLoggedIn()}" id="main">
+    <button *ngIf="isLoggedIn()" type="button" id="successButton" class="openbtn"
+        (click)="showAlert('success')">☰</button>
+    <router-outlet></router-outlet>
+</div>
+
+<div class="container mt-2" style="position: relative;">
+    <div *ngIf="alertType === 'success'" class="alert alert-success custom-alert" role="alert">
+        <p>Please Hover The Side Nav Bar..!!!</p>
+        Thanks ...
+    </div>
+</div>
+
+
+
+
+
+<!-- ErrorDetails Modal -->
+<div class="modal fade" #profilepage tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="row _3_QyU M6qwP">
+
+                    <div class="col-md-6" style="margin-left: 49px;">
+                        <div role="presentation" class="_3YYFK">
+                            <div class="i-s0W _3aMY_" data-log-name="Title">
+                                <div>
+                                    <b style="color: #d8861c; text-wrap: nowrap;">
+                                        <h5>Change Password</h5> [
+                                        {{user_name}} ]
+                                    </b>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="btn-close" (click)="closeProfilemodal()" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body modal-body1">
+                <!-- <h5 style='margin-left: 34px; color: #008000'>{{787878}}</h5>
+					<h5 style='color: red'>{{7887}}</h5> -->
+
+
+
+                <div class="card-body " style="margin-left: 3%; width: 88%;">
+                    <div class="form-horizontal">
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label" for="current-password-input">Current Password</label>
+                            <div class="col-md-9">
+                                <input id="current_pass" class="form-control"  [(ngModel)]="currentPass"
+                                [type]="cshow ? 'text' : 'password'" style="margin-top: -7px; margin-bottom: 20px;"
+                                    (keyup)="currentpasschecking($event)"
+                                    placeholder="Current Password" required />
+                                <span id="show_current_pass"
+                                    class="btn btn-secondary"  type="button" (click)="ctoggleeyepassword()"
+                                    style="float: right; margin-top: -57px;">
+                                    <span class="fas fa-eye"></span>
+                                </span>
+                                <h6 style='color: red'>{{iscurrentPassstr}}</h6>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label" for="new-password-input">New
+                                Password</label>
+                            <div class="col-md-9">
+
+                                <input class="form-control " [(ngModel)]="newpassword"  [type]="newshow ? 'text' : 'password'" id="new_pass"
+                                    style="margin-top: -7px; margin-bottom: 20px;" value="" placeholder="New Password"
+                                    required><span id="show_new_pass" class="btn btn-secondary"  type="button" (click)="newshoweyepass()"
+                                    style="float: right; margin-top: -57px;"><span
+                                        class="fas fa-eye"></span></span>
+                                <!-- <h6 style='color: red'>{{378274832}}</h6> -->
+
+
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label" for="confirm-password-input">Confirm Password</label>
+                            <div class="col-md-9">
+                                <input class="form-control" id="confirm_pass" [(ngModel)]="confirmPassword"
+                                [type]="isconfirmShow ? 'text' : 'password'" style="margin-top: -7px; margin-bottom: 20px;" value=""
+                                    placeholder="Confirm Password" required><span id="show_confirm_pass"
+                                    class="btn btn-secondary" type="button"  (click)="confimShow()"
+                                    style="float: right; margin-top: -57px;"><span
+                                        class="fas fa-eye"></span></span>
+                                <!-- <h6 style='color: red'>{{8347734}}</h6> -->
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer" style="margin-left: 26%;">
+                    <button type="submit" class="btn btn-primary"
+                        (click)="upDatepassword()">Update</button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="closeProfilemodal()"
+                    data-bs-dismiss="modal">Back</button>
+                <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,34 @@
+
+.header {
+    width: 98%;
+    height: 39px;
+    background-color: rgb(187, 40, 40);
+    margin-left: 8px;
+    margin-top: 20px;
+    border-radius: 10px;
+    color: #f9f7f7;
+    align-items: center;
+    font-size: medium;
+}
+
+
+.issue_tbl {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 17px;
+
+}
+
+.issue_tbl td,
+th {
+    border: 1px solid #dddddd;
+    text-align: center;
+    padding: 6px;
+    /*   white-space: nowrap;  This can restrict sentence from break down into several rows*/
+}
+
+.issue_tbl th {
+    background: #b80000;
+    color: white;
+}

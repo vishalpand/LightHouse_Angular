@@ -1,0 +1,378 @@
+.pointerCursor{
+	cursor: pointer;
+}
+#pageMessages {
+  position: absolute;
+    top: 75px;
+    right: 15px;
+    width: 30%;
+    z-index: 1;
+}
+html{
+ height: 100%; 
+ zoom: 80%;
+}
+
+.alert {
+  position: relative;
+}
+
+.alert .close {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: 1em;
+}
+
+.alert .fa {
+  margin-right:.3em;
+}
+
+.hideHome
+{
+	visibility: hidden;
+}
+.loader {
+  border: 2px solid #dad2d2;
+  border-radius: 50%;
+  border-top: 2px solid #3498db;
+  width: 20px;
+  height: 20px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.se-pre-con {
+	display: none;
+	position: fixed;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	z-index: 9999;
+	/* background: url(images/loader-64x/axis-loader.gif) center no-repeat
+		#676869fa; */
+	opacity: 0.6;  
+	
+	background-image: url(../images/loader-64x/loading.gif);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #9a9a9a;
+	
+}
+
+	.noPadding{
+		padding: 0;
+	}
+	.heading-text{
+    display: inline-block;
+    margin-bottom: 0;
+    color: white;
+	margin-left:1%;
+	}
+	.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 10;
+  left: 0;
+  background-color: whitesmoke;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 0.5%;
+}
+
+.sidenav a {
+     padding: 1px 3px 1px 32px;
+    text-decoration: none;
+   /* font-size: 18px;*/
+    color: black;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 0px;
+  font-size: 25px;
+  margin-left: 50px;
+}
+/* .closebtn{
+	top:2%!important;
+} */
+
+a.top-navs{
+	color:white !important;
+}
+
+li.nav-item a:hover{
+	/* font-weight: bold;
+	transition: 0.3s; */
+	cursor: pointer;
+}
+
+a.navbar-brand h4 b{
+	color: white;
+}
+
+.openMenu{
+	width:210px;
+}
+.closeMenu{
+	width:0px;
+}
+   .side-heading{
+ 	color: white;
+    background: #318cef;
+    border-radius: 5px;
+    padding: 1% 0% 1% 4%;
+
+   	}
+a.side-heading-con:hover,a.fixed-sidenav:hover{
+    color: blue;
+    background: #bee0e6;
+}
+.fixed-sidenav{
+	color:black;
+	font-weight: 600;
+    display: block;
+    padding: 0 12%;
+}
+   
+ul.fixed-sidnav-menu li:hover{
+	color: blue;
+    background: #bee0e6;
+}
+.noPadMargin{
+	padding: 0;
+    margin: 0;
+}
+
+
+/*  Adding BreadCrumbs */
+#crumbs{
+    display: inline-block;
+    margin-top:0.5%;
+}
+#crumbs ul {
+  list-style: none;
+  display: inline-table;
+  padding-left: 0;
+  margin-top: 0.5%;
+}
+#crumbs ul li {
+  display: inline;
+}
+#crumbs ul li a {
+     display: block;
+    float: left;
+    height: 25px;
+    background: #F3F5FA;
+    text-align: center;
+    padding: 0px 0px 0 15px;
+    position: relative;
+    margin: 0 5px 0 0;
+    text-decoration: none;
+    color: black;
+    font-size: 13px;
+}
+#crumbs ul li a:after {
+    content: "";
+    border-top: 13px solid transparent;
+    border-bottom: 13px solid transparent;
+    border-left: 13px solid #F3F5FA;
+    position: absolute;
+    right: -13px;
+    top: 0;
+    z-index: 1;
+}
+#crumbs ul li a:before {
+    content: "";
+    border-top: 13px solid transparent;
+    border-bottom: 13px solid transparent;
+    border-left: 10px solid #fff;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+
+#crumbs ul li:first-child a {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+#crumbs ul li:first-child a:before {
+  display: none;
+}
+
+#crumbs ul li:last-child a {
+  padding-right: 25px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+#crumbs ul li:last-child a:after {
+  display: none;
+}
+
+#crumbs ul li a:hover {
+  background: #357DFD;
+  color: #fff;
+}
+
+#crumbs ul li a:hover:after {
+  border-left-color: #357DFD;
+  color: #fff;
+}
+
+/*form styles*/
+#msform {
+    text-align: center;
+    position: relative;
+}
+/*progressbar*/
+.steps-progress-wrap{
+    margin-left: 24%;
+    z-index: 2;
+    position: absolute;
+    top: 1%;
+}
+
+#progressbar {
+    margin-bottom: 30px;
+    overflow: hidden;
+    /*CSS counters to number the steps*/
+    counter-reset: step;
+}
+
+#progressbar li {
+    list-style-type: none;
+    color: black;
+    font-size: 12px;
+    width: 20%;
+    font-weight: 600;
+    float: left;
+    position: relative;
+}
+
+#progressbar li:before {
+    content: counter(step);
+    counter-increment: step;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    display: block;
+    font-size: 12px;
+    color: #333;
+    background: whitesmoke;
+    border-radius: 25px;
+    margin: 0 auto 0px auto;
+}
+
+/*progressbar connectors*/
+#progressbar li:after {
+    content: '';
+    width: 100%;
+    height: 2px;
+    background: #0078d4;
+    position: absolute;
+    left: -50%;
+    top: 9px;
+    z-index: -1; /*put it behind the numbers*/
+}
+
+#progressbar li:first-child:after {
+    /*connector not needed before the first step*/
+    content: none;
+}
+
+/*marking active/completed steps green*/
+/*The number of the step and the connector before it = green*/
+#progressbar li.active:before, #progressbar li.active:after {
+    background: green;
+    color: white;
+}
+
+/*  MEDIA QUERY  */
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+#password-update-form{
+margin-top: 11px;
+
+}
+.modal-body {
+    overflow-y: auto;
+     margin-left: 29px;
+    max-height: 68vh;
+}
+
+#currID,#newPassId,#confoPassId{
+margin-top: 11px;
+}
+
+label {
+font-size: 13px;
+    font-weight: bold;
+}
+
+.commonCss
+{
+   height: -1vh;
+}
+/* #showIco1,#showIco2,#showIco3 {
+    padding: 10px;
+    min-width: 40px;
+    right: 0px;
+    top: 4px;
+    padding: 8px;
+    padding-left: 90%;
+    margin-top: -8%;
+}  */
+
+.tableMyEntitlemer {
+  border: 1px solid black;
+}
+.input-icons i {
+position: absolute;
+}
+
+.input-icons {
+width: 100%;
+margin-bottom: 10px;
+position: relative;
+}
+
+.icon {
+padding: 10px;
+min-width: 40px;
+right: 0px;
+top: 4px;
+    padding: 4px 0px;
+}
+
+.input-field {
+width: 100%;
+padding-left: 10px;
+}
+
+.zeroMargin {
+margin: 0;
+}

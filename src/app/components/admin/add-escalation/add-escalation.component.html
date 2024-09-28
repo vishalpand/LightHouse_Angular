@@ -1,0 +1,677 @@
+<div class="navbar">
+  <div class="dropdown" style="background-color: #e1d7d7"></div>
+</div>
+
+<!--Filter Menu End -->
+<div class="container">
+  <!-- <div class="row" *ngIf="getAllEscalationLevel()"> -->
+  <div class="row">
+    <div class="col-md-12">
+      <div class="row">
+        <div
+          class="col-md-6 form-group"
+          
+        >
+        
+          <button
+            type="submit"
+            class="p-2"
+            style="background-color: brown;
+            color: white;
+            border: none;
+            border-radius: 5px;"
+            data-bs-toggle="modal"
+            data-bs-target="#createuser1"
+            (click)="getApplicationAlllist()"
+          >
+            &nbsp;ADD Page Wise <i class="fa fa-plus"></i>
+          </button>
+
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <div
+            class="input-group input-group-sm col-md-2 pull-right"
+            
+          ></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <br /><br /><br />
+
+  <div class="row" data-ng-init="getErrorListInAddEscalation();">
+    <div style="margin-top: 2%" class="col-md-2">
+      <span style="font-size: initial" class="required"
+        >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Application Name</span
+      >
+    </div>
+
+    <div class="col-md-3">
+      <br />
+      <select
+        id="esclApp"
+        style="width: 270px; height: 30px"
+        class="form-group"
+        [(ngModel)]="appName"
+      >
+        <option value="All" disabled selected>-- Select App --</option>
+        <option *ngFor="let applications of applicationList" [value]="applications">
+          {{ applications }}
+        </option>
+      </select>
+    </div>
+
+    <div class="col-md-4" style="align-self: right">
+      <br />
+      <span
+        style="font-size: initial; position: relative; float: right"
+        class="required"
+        >Select Application Name For Edit:</span
+      >
+    </div>
+
+    <div class="col-md-3">
+      <div class="d-flex mb-2">
+        <button
+          type="button"
+          data-bs-toggle="modal"
+          data-bs-target="#editApplicationName"
+          (click)="editAppName()"
+          class="btn btn-primary btn inline mx-1"
+          style="
+            background-color: brown;
+            color: white;
+            font-size: small;
+            border: none;
+          "
+        >
+          Edit Application Name
+        </button>
+               
+      </div>
+      <select
+        id="esclApp2"
+        style="width: 19vw; margin-left: 1mm"
+        data-ng-init="appName2 = 'All'"
+        data-ng-model="appName2"
+        [(ngModel)]="oldAppName"
+      >
+        <option value="All" disabled selected>-- Select App --</option>
+        <option *ngFor="let applications of applicationList" [value]="applications">
+          {{ applications }}
+        </option>
+      </select>
+    </div>
+  </div>
+
+  <br /><br />
+
+  <div class="row">
+    <div style="margin-top: 3%" class="col-md-2">
+      <span style="font-size: initial" class="required"
+        >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Select Level</span
+      >
+    </div>
+    <div class="col-md-3">
+      <select
+        id="Level"
+        class="form-control"
+        [(ngModel)]="level"
+        multiple
+        size="6"
+      >
+        <option value="All" disabled>--Select--</option>
+        <option value="1">Level 1</option>
+        <option value="2">Level 2</option>
+        <option value="3">Level 3</option>
+        <option value="4">Level 4</option>
+        <option value="5">Level 5</option>
+        <option value="6">Level 6</option>
+        <option value="7">Level 7</option>
+      </select>
+    </div>
+  </div>
+
+  <button
+    type="button"
+    class="btn btn-sm mx-1"
+    data-ng-click="getdata(appName,level)"
+    style="background-color: brown; color: white"
+    (click)="getAllEscalationLevel()"
+  >
+    Submit
+  </button>
+</div>
+<br />
+
+<div class="tableFixHead">
+  <table>
+    <thead>
+      <tr class="g">
+        <th style="width: 25%; text-align: center">Application Name</th>
+        <th style="width: 25%; text-align: center">Page Name</th>
+        <th style="width: 8%; text-align: center">Level</th>        
+        <th style="width: 15%; text-align: center">Full Name</th>
+        <th style="width: 10%; text-align: center">Email</th>
+        <th style="width: 17%; text-align: center">Operations</th>
+      </tr>
+    </thead>
+    <tbody style="padding-top: 2%">
+      <tr *ngFor="let escalionslevel of addecalationslevellist; let i = index">
+        <!-- 				<td>{{ l.id }}</td> -->
+        
+        <td>{{ escalionslevel[2] }}</td>
+        <td>{{ escalionslevel[3] }}</td>
+        <td>{{ escalionslevel[1] }}</td>
+        <td>{{ escalionslevel[4] }}</td>
+        <td>{{ escalionslevel[5] }}</td>
+        <td>
+          &nbsp; &nbsp;
+          <!-- ===========
+           ===============
+           ============ -->
+          <button
+            type="button"
+            class="btn btn-sm"
+            style="background-color: rgb(140, 137, 137); color: white;"
+            id="Update"
+            data-bs-toggle="modal"
+            data-bs-target="#editEscalation"
+           (click)="editEscalation(escalionslevel[0],escalionslevel[2],escalionslevel[3],escalionslevel[1],escalionslevel[4],escalionslevel[5])"
+          >
+            Edit
+          </button> &nbsp;
+
+          <button
+            type="submit"
+            class="btn btn-sm"
+            style="background-color: rgb(140, 137, 137); color: white;"
+           (click)="onDelete(escalionslevel[0],escalionslevel[2],escalionslevel[3])"
+          >
+            Delete
+          </button>
+        </td>
+      </tr>
+
+      <tr
+        *ngIf="!addecalationslevellist || addecalationslevellist.length === 0"
+      >
+        <td colspan="12" class="text-center">
+          <p style="color: #3c9b4e; margin: 0">No data available..!!</p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Add Application Wise Modal -->
+<div
+  class="modal fade" *ngIf="isDisplayed"
+  id="editApplicationName"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4
+          class="modal-title"
+          style="
+            margin-left: 29%;
+            font-weight: bolder;
+            font-size: 160%;
+            font-family: sans-serif;
+          "
+        >
+          Edit Application Name &nbsp;&nbsp;&nbsp;<span
+            id="createUserStatus"
+            style="color: green; font-size: 17px"
+          ></span>
+          <span id="statusFails" style="color: red; font-size: 17px"></span>
+        </h4>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-body">
+          <div class="x_content" style="font-family: sans-serif">
+            <div id="demo-form" name="submitForm">
+                <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+              
+                <div class="d-flex mt-4">
+                    <div class="form-group col-md-6" style="width: 18%">
+                      <label for="fullName" class="col-form-label"
+                        >Old Application Name:</label
+                      >
+                    </div>
+                    <div class="" style="width: 80%">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="fullName"
+                        [(ngModel)]="oldAppName"
+                        readonly
+                        required
+                      />
+                    </div>
+                  </div>
+
+                  <div class="d-flex mt-4">
+                    <div class="form-group col-md-6" style="width: 18%">
+                      <label for="fullName" class="col-form-label"
+                        >New Application Name:</label
+                      >
+                    </div>
+                    <div class="" style="width: 80%">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="fullName"
+                        [(ngModel)]="newAppName"
+                        placeholder="Enter New Application Name"
+                        required
+                      />
+                    </div>
+                  </div>
+                  
+    
+
+                <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+            </div>
+          </div>
+        </div>
+
+        <div class="ln_solid"></div>
+        <div class="form-group">
+          <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3"></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="changeAppName()">Update</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Add Pages Wise Modal -->
+ <!-- used in add page wise -->
+<div
+  class="modal fade"
+  id="createuser1"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4
+          class="modal-title"
+          style="
+            margin-left: 29%;
+            font-weight: bolder;
+            font-size: 160%;
+            font-family: sans-serif;
+          "
+        >
+          Create New Level For Pages&nbsp;&nbsp;&nbsp;<span
+            id="createUserStatus"
+            style="color: green; font-size: 17px"
+          ></span>
+          <span id="statusFails" style="color: red; font-size: 17px"></span>
+        </h4>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-body">
+          <div class="x_content" style="font-family: sans-serif">
+            <div id="demo-form" name="submitForm">
+              <div class="row">
+                <label
+                  for="exampleFormControlSelect2"
+                  style="display: inline-block; width: 150px; height: 30px"
+                  >Application Name</label
+                >
+
+                <select
+                  id="esclApp"
+                  style="width: 200px; height: 30px"
+                  class="form-group"
+                  [(ngModel)]="appNameForCreation"
+                >
+                  <option
+                    *ngFor="let applications of applicationList"
+                    [value]="applications"
+                  >
+                    {{ applications }}
+                  </option>
+                </select>
+
+                <div class="col-md-6">
+                  <button type="submit" class="g p-1" (click)="showPages()">
+                    &nbsp;select Pages <i class="fa fa-plus"></i>
+                  </button>
+                </div>
+              </div>
+
+              <div *ngIf="isPages">
+                <div class="row" data-ng-show="toggle">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <span
+                        style="color: red; margin-left: 5px; font-size: smaller"
+                      >
+                        *For page selection drag page to right
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <!--========================================================================================================================== -->
+
+                    <div
+                      class="main d-flex mb-0"
+                      style="width: 100%; height: min-content"
+                    >
+                      <div class="example-container" style="width: 45%">
+                        <div
+                          cdkDropList
+                          #todoList="cdkDropList"
+                          [cdkDropListData]="pages"
+                          [cdkDropListConnectedTo]="[doneList]"
+                          class="example-list"
+                          (cdkDropListDropped)="drop($event)"
+                        >
+                          <div
+                            class="example-box"
+                            *ngFor="let item of pages"
+                            cdkDrag
+                          >
+                            {{ item }}
+                          </div>
+                        </div>
+                      </div>
+
+                      <div style="width: 10%">
+                        <button
+                          title="Add All"
+                          (click)="addAndRemove(true)"
+                          class="m-1 p-1"
+                          style="background: none; border: none; color: inherit"
+                        >
+                          <i
+                            class="fas fa-arrow-alt-circle-right"
+                            style="font-size: 24px"
+                          ></i>
+                        </button>
+                        <br />
+                        <button
+                          title="Remove All"
+                          (click)="addAndRemove(false)"
+                          class="m-1 p-1"
+                          style="background: none; border: none; color: inherit"
+                        >
+                          <i
+                            class="fas fa-arrow-alt-circle-left"
+                            style="font-size: 24px"
+                          ></i>
+                        </button>
+                      </div>
+
+                      <div class="example-container" style="width: 45%">
+                        <div
+                          cdkDropList
+                          #doneList="cdkDropList"
+                          [cdkDropListData]="selected"
+                          [cdkDropListConnectedTo]="[todoList]"
+                          class="example-list"
+                          (cdkDropListDropped)="drop($event)"
+                        >
+                          <div
+                            class="example-box"
+                            *ngFor="let item of selected"
+                            cdkDrag
+                          >
+                            {{ item }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!--  -->
+                  </div>
+                </div>
+              </div>
+              <div class="d-flex mt-4">
+                <div class="form-group col-md-6" style="width: 18%">
+                  <label for="fullName" class="col-form-label"
+                    >Full Name:</label
+                  >
+                </div>
+                <div class="" style="width: 80%">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="fullName"
+                    [(ngModel)]="fullName"
+                    placeholder="Enter Full Name"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="row mt-4">
+                <label class="col-md-3" for="userid">Levels :</label>
+                <div class="col-md-9">
+                  <div class="row">
+                    <label class="col-md-4"
+                      >Level 1:
+                      <input
+                        type="checkbox"
+                        name="level1"
+                        [value]="true"
+                        [(ngModel)]="level1"
+                    /></label>
+                    <label class="col-md-4"
+                      >Level 2:
+                      <input
+                        type="checkbox"
+                        name="level2"
+                        [value]="true"
+                        [(ngModel)]="level2"
+                    /></label>
+                    <label class="col-md-4"
+                      >Level 3:
+                      <input
+                        type="checkbox"
+                        name="level3"
+                        [value]="true"
+                        [(ngModel)]="level3"
+                    /></label>
+                  </div>
+                  <div class="row">
+                    <label class="col-md-4"
+                      >Level 4:
+                      <input
+                        type="checkbox"
+                        name="level4"
+                        [value]="true"
+                        [(ngModel)]="level4"
+                    /></label>
+                    <label class="col-md-4"
+                      >Level 5:
+                      <input
+                        type="checkbox"
+                        name="level5"
+                        [value]="true"
+                        [(ngModel)]="level5"
+                    /></label>
+                    <label class="col-md-4"
+                      >Level 6:
+                      <input
+                        type="checkbox"
+                        name="level6"
+                        [value]="true"
+                        [(ngModel)]="level6"
+                    /></label>
+                  </div>
+                  <div class="row">
+                    <label class="col-md-4"
+                      >Level 7:
+                      <input
+                        type="checkbox"
+                        name="level7"
+                        [value]="true"
+                        [(ngModel)]="level7"
+                    /></label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="d-flex mt-4">
+                <div class="form-group col-md-6" style="width: 18%">
+                  <label for="email" class="col-form-label">Email:</label>
+                </div>
+                <div class="" style="width: 80%">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="fullName"
+                    [(ngModel)]="email"
+                    placeholder="Enter Email"
+                    required
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="ln_solid"></div>
+          <div class="form-group">
+            <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3"></div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-primary"
+            (click)="createEscalation()"
+          >
+            Create Level
+          </button>
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div
+    class="modal fade"
+    id="upadateesca"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">...</div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========EDIT MODAL================ -->
+
+<div class="modal" id="editEscalation" tabindex="-1">
+  <div class="modal-dialog ">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Edit Escalation</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div *ngIf="isMessage" style="color: #2e781a; font-size: 1.5rem;" class="mb-0 pb-0">
+          {{ message}}
+        </div>
+       
+
+        <div class="container m-1 pt-0 mt-0 mb-0">
+          <div class="mb-3">
+            <label for="appName" class="form-label">Application Name</label>
+            <input type="text" class="form-control" id="appName" [(ngModel)]="EditEscalation.appName" readonly>
+          </div>
+          <div class="mb-3">
+            <label for="pageName" class="form-label">Page Name</label>
+            <input type="text" class="form-control" id="pageName" [(ngModel)]="EditEscalation.pageName" readonly>
+          </div>
+          <div class="mb-3">
+            <label for="name" class="form-label">Full Name</label>
+            <input type="text" class="form-control" id="name" [(ngModel)]="EditEscalation.name" >
+          </div>
+          <div class="mb-3">
+            <label for="name" class="form-label">Email</label>
+            <input type="text" class="form-control" id="name" [(ngModel)]="EditEscalation.email" >
+          </div>
+          <div class="mb-3">
+            <label for="level" class="form-label">Level</label>
+            <select id="level" class="form-select" [(ngModel)]="EditEscalation.level">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+
+            </select>
+          </div>
+        </div>
+       
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="onUpdateEscalation()">Update</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="closeModal()">Close</button>
+       
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,371 @@
+.wrapp
+{
+    margin: -1% auto;
+    padding: 0px;
+    overflow: hidden;
+    margin-left: 10%;
+
+}
+ .contain {
+        margin: 10px;
+    width: 198px;
+    height: 140px;
+    
+} 
+.dashboard_wrap{
+    
+background: whitesmoke;
+}
+.project_details table tr th:not(:last-child){
+padding-right: 4%;
+}
+.testdes{
+display: inline-block;
+/*text-align: center;*/
+}
+
+.testdes:not(:last-child){
+margin-right: 15%;
+
+}
+.testcount{
+color:#0078d4;
+}
+.testcount:not(:last-child){
+margin-right: 24%;
+}
+.projetc_labels td{
+font-size: 13px;
+}
+
+
+.table_run tr:first-child{
+text-align: center;
+
+}
+.table_run tr:first-child td:first-child{
+background: #FFC107;
+    color: white;
+}
+.table_run tr:first-child td:last-child{
+background: #08af08;
+    color: white;
+}
+.status{
+   border-left: 2px solid #0078d4;
+}
+.donut_Project1,.Tacho_Project1{
+padding-top: 5px;
+    padding-bottom: 4px;
+}
+.donut_Project1 h6,.Tacho_Project1 h6{
+font-size: 12px;
+}
+.executed_status tr td{
+font-size: 14px;
+}
+
+.table_run tr span{
+font-weight: 400;
+}
+.project_row div:not(:last-child){
+padding-right: 0px;
+}
+.res_status tr td:first-child{
+width: 5vw;
+color: white;
+text-align: center;
+}
+.res_status tr td:last-child{
+font-size: 13px;
+}
+.header_wrap{
+margin-bottom: 6px;
+    /* background: #0078d4; */
+    background: #676566;
+    color: white!;
+    margin-left: 1px;
+}
+.header_wrap span{
+    padding: 3px 0px;
+text-align: center;
+    display: block;
+}
+.project_row:not(:first-child){
+margin-bottom: 6px;
+}
+
+.quickLinks-font {
+    text-decoration: underline;
+    font-style: oblique;
+    font-size: 104%;
+}
+
+
+
+.card {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+}
+.card-body {
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding: 1.25rem;
+    /* min-height: 28.5vh; */
+}
+
+  .table-slowPage {
+font-family: arial, sans-serif;
+border-collapse: collapse;
+width: 100%;
+}
+
+.table-slowPage td {
+border: 1px solid #dddddd;
+text-align: center;
+font-size:11px;
+/* padding: 3px; */
+}
+
+.table-slowPage th {
+background: #cd2c5d;
+text-align: center;
+font-size:11px;
+color: white!;
+white-space: nowrap;
+position: sticky;
+height: 1vh;
+}
+
+.table-slowPage tr:nth-child(even) {
+background-color: #dddddd;
+}  
+.nodatalavel{
+margin: 25% 0%;
+    color: red;
+    font-size: 12px;
+    width: 40%;
+}
+
+
+.container-fluid {
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 2%;
+    padding-right: 2%;
+    }
+
+
+
+.quickLinks-font {
+    text-decoration: underline;
+    font-style: oblique;
+    font-size: 80%;
+}
+
+.fa-style{
+    font-size: 95%;
+    color: #5a738e;
+    margin-right: 2%;
+}
+
+@media only screen and (max-width: 687px) {
+.quickLinks-font {
+    text-decoration: underline;
+    font-style: oblique;
+    font-size: 90%;
+}
+.contain {   
+     
+	 height: 235px;
+    width: 243px;
+    /* margin-top: -13%; */
+    margin-left: 5%;
+    margin: 11px;
+}
+.wrapp
+{
+margin: -1% auto;
+ padding: 0px;
+ overflow: hidden;
+}
+.donut_Project1{
+     width: 43vh;
+}
+.fa-style{
+font-size:95%;
+color:#5a738e;
+margin-right: 2%;
+}
+
+div {
+    display: block;
+}
+
+.projetc_labels td {
+    font-size: 12px;
+}
+h5, .h5 {
+    font-size: 12px;
+    margin-left: 78px;
+    font: icon;
+}
+.col-md-2{
+width: 95vw;
+   background-color: white;
+}
+
+.project_row div.col-md-3 {
+
+width:95vw;
+}
+.project_row div:not(:first-child){
+margin-top:2%;
+}
+
+#container*{
+height:230px;
+}
+.project_details table tr:last-child td button{
+margin-left:28% !important;
+}
+.header_wrap{
+display:none;
+}
+.nav_menu{
+   font-size: 10px;
+}
+}
+
+@media only screen and (min-width:1400px) {
+.contain {
+ /*   margin: 39px;
+    margin-top: -18%; */
+    margin: 10px;
+    width: 198px;
+    height: 140px;
+}
+/*  .quickLinks-font {
+    text-decoration: underline;
+    font-style: oblique;
+    font-size: 75%;
+}
+
+.fa-style{
+font-size:120%;
+color:#5a738e;
+margin-right: 2%;
+} */
+} 
+
+social-media.table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td {
+    padding: 4%;
+    line-height: 1.42857143;
+    vertical-align: top;
+    border-top: 0px solid #ddd;
+}
+.checked {
+  color: orange;
+}
+
+.image {
+background: #ffffff;
+border-radius: 10px;
+margin-top: 6%;
+width:294%;
+height:3vh;
+}
+
+
+
+
+
+
+
+
+
+/* ======================================= */
+/* ======================================= */
+
+div .dots {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+      background-color: rgba(35, 31, 31, 0.746);
+    box-shadow: 0px 8px 0px rgba(35, 31, 31, 0.746), 0px 16px 0px rgba(35, 31, 31, 0.746);
+    cursor: pointer;
+    
+
+  }
+
+
+
+  .mainCard{
+    width: auto;
+    height: 140px;
+  border-radius: 5px;
+  padding-right: 10px;
+  
+
+  }
+
+
+
+.cardOptions ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.cardOptions ul li {
+  padding: 8px 3px;
+  cursor: pointer;
+  
+}
+
+.cardOptions ul li:hover {
+  background-color: #c0bebf;
+  border-radius: 3px;
+}
+
+.data table tr th{
+    padding: 5px;
+    margin-right: 5px;
+    width: 60%;
+}
+
+.data table tr td{
+    padding: 5px;
+    text-align: right;
+    width: 40%;
+}
+
+.data table {
+    font-size: .85rem;
+}
+
+.slowPages{
+    /* border:1px solid #595858; */
+    /* padding: 100px */
+    /* margin: 10px; */
+    font-size: 0.85rem;
+}
+
+.slowPages th{
+    /* text-align: center; */
+    padding: 2px 5px;
+    background-color: rgb(173, 171, 171);
+}
+
+.slowPages td{
+
+    padding:0px 5px;
+}

@@ -1,0 +1,127 @@
+<div style="padding-top: 40px;">
+    <div class="summaryHeading">
+        <div class="form-container">
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="form-item">
+                        <label style="text-align: center;">Application</label>
+                        <select class="form-control down" [(ngModel)]="appName" >
+                            <option value="">Select</option>
+                        <option *ngFor="let application of applicationList" [value]="application">{{ application }}
+                        </option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="col-md-2">
+                    <div class="form-item">
+                        <label style="text-align: center;">Start Date</label>
+                        <input type="date" id="fromDate" class="form-control down" [max]="toDayDate" placeholder="yyyy-mm-dd"  [(ngModel)]="startDate"  required>
+                        <!-- <input type="time" id="startdatetime" class="form-control down" value="00:00" data-ng-model="startDateTime" step="1" data-ng-disabled="monthEnd" /> -->
+                    </div>
+                </div>
+
+
+                <div class="col-md-2">
+                    <div class="form-item">
+                        <label style="text-align: center;">Select Start Time</label>
+                        <!-- <input type="date" id="fromDate" class="form-control down" [max]="toDayDate" placeholder="yyyy-mm-dd" required> -->
+                        <input type="time" id="startdatetime" class="form-control down" value="00:00" [(ngModel)]="startTime" step="1" data-ng-disabled="monthEnd" />
+                    </div>
+                </div>
+
+
+                <div class="col-md-2">
+                    <div class="form-item">
+                        <label style="text-align: center;">End Date</label>
+                        <input type="date" id="fromDate" class="form-control down" placeholder="yyyy-mm-dd" [(ngModel)]="endDate" required>
+                        <!-- <input type="time" id="startdatetime" class="form-control down" value="00:00" data-ng-model="startDateTime" step="1" data-ng-disabled="monthEnd" /> -->
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="form-item">
+                        <label style="text-align: center;">Select End Time</label>
+                        <!-- <input type="date" id="fromDate" class="form-control down" placeholder="yyyy-mm-dd" required> -->
+                        <input type="time" id="startdatetime" class="form-control down" value="00:00" [(ngModel)]="endTime" step="1" data-ng-disabled="monthEnd" />
+                    </div>
+                </div>
+
+                
+                <div class="col-md-2">
+                    <div class="form-item">
+                        <label style="margin-bottom: 17px;"></label>
+                        <button type="button" class="btn btn-secondary btm-sm custom-btn" (click)="getPerformance(appName,startDate,endDate,startTime,endTime)" style="background-color: #b80000; border-color:#b80000;">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="d-flex align-items-center justify-content-between mt-4 ">
+        <h3 class="mr-auto" style="margin-left: 5mm;">Performance Report</h3>
+        <div style="margin-right: 0.2cm;">
+
+            <button type="button" class="btn btn-secondary p-1 mx-5" (click)="exportTableToExcel('myTable')"
+                style="background-color: #b80000; border-color:#b80000 ">Download Report</button>
+        </div>
+    </div>
+
+    <!-- <div style="margin-left: 3mm;margin-right:7mm"> -->
+        <table id="myTable" class="performanceDetail">
+            <thead>
+                <tr>
+                    <th>Application Name</th>
+                    <th>Page Name</th>
+                    <th>90th Percentile (sec)</th>
+                    <th>95th Percentile (sec)</th>  
+                    <th>Max Responce (sec)</th>
+                    <th>Average Responce (sec)</th>
+                    <th>Availability (%)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr  *ngFor="let performlist of getAllperformancelist;  let  i=index">
+
+                    <!-- {{ availability ? (availability
+                    | number:'2.0-2') : 'No Data' }} -->
+
+                    <td>{{performlist[0]}}</td>
+                    <td>{{performlist[1]}}</td>
+                    <td>{{performlist[2]}}</td>
+                    <td>{{performlist[3]}}</td>
+                    <td>{{performlist[4]}}</td>
+                    <td>{{performlist[5]}}</td>
+                    <td>{{performlist[6]}}</td>
+
+                </tr>
+
+                <tr *ngIf="!getAllperformancelist || getAllperformancelist.length === 0">
+                    <td colspan="12" class="text-center">
+                        <p style="color: #3c9b4e; margin: 0;">No data available..!!</p>
+                    </td>
+                </tr> 
+
+                <!-- <tr>
+                    <td>BG_Insurance_Maker</td>
+                    <td>Home page</td>
+                    <td>2.6</td>
+                    <td>8.50</td>
+                    <td>677</td>
+                    <td>3.50</td>
+                    <td>100% </td>
+                </tr> -->
+            </tbody>
+        </table>
+    <!-- </div> -->
+
+</div>
+
+
+
+
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="line-spin-fade" [fullScreen]="true">
+    <p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>

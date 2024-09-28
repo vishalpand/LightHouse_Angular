@@ -1,0 +1,87 @@
+body {
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+   
+}
+
+
+.selected-options {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .selected-option {
+    background-color: #f77777;
+    border-radius: 20px;
+    padding: 5px 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .delete-option {
+    cursor: pointer;
+    margin-left: 5px;
+  }
+  
+
+.downtime{
+    border-collapse: collapse;
+    height:auto;
+    margin-top: 50px;
+    margin-left: 1px;
+    width: 20vw;
+}
+.downtime td, .downtime th {
+    border:none;
+    padding: 10px; /* Adjust the padding as needed */
+    text-align: left;
+}
+.downtime label {
+    font-weight: 600;
+    margin-right: 5px;
+}
+
+input[type="text"],
+input[type="email"],
+select {
+    height: 40px;
+   
+}
+
+.rightside {
+    height: 400px;
+    width: 60%;
+    margin-top: 35px;
+    float: right;
+
+
+}
+.rightside, .appReportTable {
+    overflow-y: auto;
+    height: 100vh; 
+}
+
+table.appReportTable {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.appReportTable td,
+th {
+    border: 1px solid #dddddd;
+    text-align: center;
+    padding: 6px;
+    /*   white-space: nowrap;  This can restrict sentence from break down into several rows*/
+}
+
+.appReportTable th {
+    background: #cd2c5d;
+    color: white;
+}
+
+.appReportTable tr:nth-child(even) {
+    background-color: #dddddd;
+}

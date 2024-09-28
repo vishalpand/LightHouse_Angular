@@ -1,0 +1,64 @@
+
+.summaryHeading {
+    font-family: Arial, sans-serif;
+    width: 100%;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+.form-container {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.form-item {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+}
+
+.form-item label {
+    font-weight: bold;
+    color: #030303;
+}
+
+.form-select, .form-control, .btn {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.btn {
+    background-color: #b80000;
+    border-color: #b80000;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+    text-align: center;
+}
+
+
+
+
+.errorTbl {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+   
+   margin-top: 5mm;
+  
+}
+
+.errorTbl td,
+th {
+    border: 1px solid #dddddd;
+    text-align: center;
+    padding: 6px;
+    /*   white-space: nowrap;  This can restrict sentence from break down into several rows*/
+}
+
+.errorTbl th {
+    background: #b80000;
+    color: white;
+}
+

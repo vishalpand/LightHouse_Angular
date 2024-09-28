@@ -1,0 +1,245 @@
+<div class="skippedErr_header d-flex">
+    <div class="dropdown inline">
+      <button
+        class="btn btn-danger dropdown-toggle rounded-0"
+        type="button"
+        id="dropdownMenuButton1"
+        data-bs-toggle="dropdown"
+        aria-haspopup="true"
+        aria-expanded="false"
+      >
+        Select Issue
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        <a
+          class="dropdown-item"
+          href="ApmosysMonitoringPortal/Dashboard/report_error"
+          >Current Issue</a
+        >
+        <a
+          class="dropdown-item"
+          href="ApmosysMonitoringPortal/Dashboard/solved_error"
+          >Skipped Issue</a
+        >
+        <a
+          class="dropdown-item"
+          href="ApmosysMonitoringPortal/Dashboard/skipped_error"
+          >Solved Issue</a
+        >
+      </div>
+    </div>
+  </div>
+  
+  <div class="summaryHeading">
+    <div class="form-container">
+      <div class="row">
+        <div class="col-md-2">
+          <div class="form-item">
+            <label style="text-align: center">Application</label>
+            <select class="form-control down" [(ngModel)]="applicationName">
+              <option value="All" selected>All</option>
+              <option
+                *ngFor="let application of getApplicationList"
+                [value]="application"
+              >
+                {{ application }}
+              </option>
+            </select>
+          </div>
+        </div>
+  
+        <div class="col-md-2">
+          <div class="form-item">
+            <label style="text-align: center">Start Date</label>
+            <input
+              type="date"
+              id="fromDate"
+              class="form-control down"
+              [max]="toDayDate"
+              placeholder="yyyy-mm-dd"
+              [(ngModel)]="startDate"
+              required
+            />
+            <!-- <input type="time" id="startdatetime" class="form-control down" value="00:00" data-ng-model="startDateTime" step="1" data-ng-disabled="monthEnd" /> -->
+          </div>
+        </div>
+  
+        <div class="col-md-2">
+          <div class="form-item">
+            <label style="text-align: center">Select Start Time</label>
+            <!-- <input type="date" id="fromDate" class="form-control down" [max]="toDayDate" placeholder="yyyy-mm-dd" required> -->
+            <input
+              type="time"
+              id="startdatetime"
+              class="form-control down"
+              value="00:00"
+              [(ngModel)]="startTime"
+              step="1"
+              data-ng-disabled="monthEnd"
+            />
+          </div>
+        </div>
+  
+        <div class="col-md-2">
+          <div class="form-item">
+            <label style="text-align: center">End Date</label>
+            <input
+              type="date"
+              id="fromDate"
+              class="form-control down"
+              placeholder="yyyy-mm-dd"
+              [(ngModel)]="endDate"
+              required
+            />
+            <!-- <input type="time" id="startdatetime" class="form-control down" value="00:00" data-ng-model="startDateTime" step="1" data-ng-disabled="monthEnd" /> -->
+          </div>
+        </div>
+  
+        <div class="col-md-2">
+          <div class="form-item">
+            <label style="text-align: center">Select End Time</label>
+            <!-- <input type="date" id="fromDate" class="form-control down" placeholder="yyyy-mm-dd" required> -->
+            <input
+              type="time"
+              id="startdatetime"
+              class="form-control down"
+              value="00:00"
+              [(ngModel)]="endTime"
+              step="1"
+              data-ng-disabled="monthEnd"
+            />
+          </div>
+        </div>
+  
+        <div class="col-md-2">
+          <div class="form-item">
+            <label style="margin-bottom: 17px"></label>
+            <button
+              type="button"
+              class="btn btn-secondary btm-sm custom-btn"
+              style="background-color: #b80000; border-color: #b80000"
+              (click)="getIssuesOnEscalationByStatus()"
+            >
+              Submit
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <hr />
+  
+  <div class="d-flex w-100">
+    <div class="d-flex mt-2 ms-3" style="width: 13%">
+      <label class="inline me-3 mt-2">Show :</label>
+      <select
+        class="form-select-sm inline me-4 p-2 border-light"
+        (change)="onSelectChange($event)"
+      >
+        <option value="10" selected>10</option>
+        <option value="15">15</option>
+        <option value="20">20</option>
+      </select>
+    </div>
+    <!-- search================================= -->
+    <div class="d-flex mt-2 ms-3" style="width: 87%">
+      <div class="ms-auto me-4">
+        <label class="inline me-2"><b>Search:</b></label>
+        <input
+          type="text"
+          placeholder="search here.."
+          [(ngModel)]="filterValue" (input)="applyFilter()"
+        />
+      </div>
+    </div>
+  </div>
+  
+  <div>
+    <h6 class="mt-4 ms-3"><b>Entries</b></h6>
+    <div style="margin-left: 3mm; margin-right: 1%">
+      <table class="ReportTable">
+        <thead>
+          <tr>
+            <th>Application Name</th>
+            <th>Page Name</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Level</th>
+            <th>Error Description</th>
+            <th>Screenshot</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let list of getListForPagination">
+            <td>{{ list[0] }}</td>
+            <td>{{ list[1] }}</td>
+            <td>{{ list[2] }}</td>
+            <td>{{ list[3] }}</td>
+            <td>{{ list[4] }}</td>
+            <td>{{ list[5] }}</td>
+            <td>
+              <i
+              class="fas fa-eye"
+              style="font-size: 20px"
+              (click)="getScreenShot(list[6])"
+            ></i>
+            </td>
+          </tr>
+          <tr *ngIf="!getListForPagination || getListForPagination.length === 0">
+            <td colspan="10" class="text-success">No Data Observed</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  <!-- Pagination controls -->
+  <div *ngIf="totalPages > 1" class="m-4 pl-4">
+    <ul class="pagination">
+      <li class="page-item" [class.disabled]="currentPage === 1">
+        <a class="page-link" (click)="onPageChange(currentPage - 1)">Previous</a>
+      </li>
+      <li
+        class="page-item"
+        *ngFor="let page of pageNumbers()"
+        [class.active]="currentPage === page"
+      >
+        <a class="page-link" (click)="onPageChange(page)">{{ page }}</a>
+      </li>
+      <li class="page-item" [class.disabled]="currentPage === totalPages">
+        <a class="page-link" (click)="onPageChange(currentPage + 1)">Next</a>
+      </li>
+    </ul>
+  </div>
+  
+  
+  <!-- ================SCREENSHOT MODAL========================= -->
+  
+  <div class="modal fade" id="screenshotModal" [ngClass]="{'show': isSreenshotmodal, 'fade': isSreenshotmodal}"
+      tabindex="-1" role="dialog" [ngStyle]="{'display': isSreenshotmodal ? 'block' : 'none'}">
+      <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h4 class="modal-title" style="
+              margin-left: 5%;
+              font-size: 25;
+              /* font-weight: bold; */
+            "> <span>Screenshot Preview </span>
+  
+                  </h4>
+                  <button type="button" class="btn-close" (click)="isCurrentclosemodal()" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                  <div class="modal-body">
+                      <img [src]="screenshotUrl" alt="Screenshot" class="img-fluid">
+                  </div>
+              </div> 
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-warning" (click)="isCurrentclosemodal()">
+                      Cancel
+                  </button>
+              </div>
+          </div>
+      </div>
+  </div>

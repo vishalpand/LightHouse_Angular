@@ -1,0 +1,43 @@
+
+
+.company-name {
+    font-size: x-large;
+    margin-left: 30px;
+}
+
+.certification {
+    font-size: xx-small;
+    margin-top: 1px;
+    margin-left: 30px;
+}
+
+body {
+    font-family: "Lato", sans-serif;
+}
+
+
+
+.openbtn:hover {
+    background-color: #444;
+}
+
+#main {
+    transition: margin-left .5s;
+    padding: 16px;
+    /* margin-top: 50px; */
+}
+
+
+
+
+.tile_stats_count {
+    background: whitesmoke;
+    padding: 3px;
+    border: 1px solid white;
+    border-radius: 4px;
+    width: 20%;
+    height: 21mm;
+    text-wrap: nowrap;
+ 
+}
+

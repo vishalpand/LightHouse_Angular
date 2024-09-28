@@ -1,0 +1,249 @@
+<div *ngIf="isUserLogged =='Y'" id="main" style="overflow-y: auto; padding-top: 30px;">
+    <div class="row">
+        <table>
+            <tr>
+                <td><label>Application</label></td>
+                <td>
+                    <select class="form-select form-select-sm" style="width: 150px; margin-left: 4px;"
+                        [(ngModel)]="appName">
+                        <option value="">Select</option>
+                        <option *ngFor="let application of applicationList" [value]="application">{{ application }}
+                        </option>
+
+                    </select>
+                </td>
+
+
+                <td style="padding: 10px; font-size: 96%;"><label>Start&nbsp;Date</label></td>
+
+                <td><input type="date" id="fromDate" [max]="maxTodayDate" class="form-control down"
+                        placeholder="yyyy-mm-dd" required [(ngModel)]="startDate" style="margin-right: 0px;"></td>
+                <td><input id="formtime" type='time' value="00:00" required [(ngModel)]="startTime" step="1" style="width: 95%; height: -1%; margin-bottom: 16%;
+                                    padding: 5px; border: 1px solid #ccc; border-radius: 3px;
+                                    margin-top: 16px; margin-bottom: 16px; resize: none;"></td>
+
+
+                <td style="padding: 10px; font-size: 96%;"><label>End&nbsp;Date</label></td>
+                <td> <input type="date" id="toDate" [max]="maxTodayDate" class="form-control down"
+                        placeholder="yyyy-mm-dd" required [(ngModel)]="endDate" style="margin-right: 0px"></td>
+                <td><input id="totime" type='time' value="00:00" required [(ngModel)]="endTime" step="1" style="width: 95%; height: -1%; margin-bottom: 17px;
+                                        padding: 5px; border: 1px solid #ccc; border-radius: 3px;
+                                        margin-top: 16px; margin-bottom: 16px; resize: none;"></td>
+
+                <td><button type="button" class="btn btn-primary "
+                        (click)="getAllDashboardData(appName,startDate,endDate,startTime,endTime)"
+                        style="background-color: #b80000; border-color: #b80000;">Submit</button>
+
+                </td>
+
+
+                <td>
+                    <i class="fas fa-sync" style="font-size: 20px; color: #b80000; cursor: pointer; margin-left: 5px;"
+                        (click)="clearDashboardData()"></i>
+                </td>
+
+
+            </tr>
+        </table>
+
+        <!-- </nav> -->
+        <!-- </div> -->
+        <!-- </div> -->
+
+
+        <div class="tile_stats_count text-center" style="background: green; color: white;">
+
+            <div class="right">
+                <span class="count_top"><i class="fa fa-user"></i>
+                    Average Availability</span>
+                <div class="count #73879C;" style="font-size: 35px; text-align: center;">{{ availability ? (availability
+                    | number:'2.0-2') : 'No Data' }}
+                </div>
+
+            </div>
+        </div>
+
+        <div class="tile_stats_count text-center" style="background: orange; color: white;">
+
+            <div class="right">
+                <span class="count_top"><i class="fa fa-user"></i>
+                    Transactions Monitored</span>
+                <div class="count" style="font-size: 35px; text-align: center;">
+                    {{ transaction_monitored ? transaction_monitored : 'No Data' }}</div>
+            </div>
+        </div>
+
+        <div class="tile_stats_count text-center" style="background: red; color: white;">
+
+            <div class="right">
+                <span class="count_top"><i class="fa fa-user"></i> Error Count</span>
+                <div class="count" style="font-size: 35px; color: white; text-align: center; text-decoration: none;">
+                    <a (click)="openErrormodal()" data-bs-toggle="modal" data-bs-target="#errorModal"
+                        style="color: white;">
+                        <span [ngStyle]="{'text-decoration': isHovered ? 'underline' : 'none'}"
+                            (mouseenter)="isHovered = true" (mouseleave)="isHovered = false"> {{ error_Count !== null &&
+                            error_Count !== undefined ? error_Count : 'No Data' }}</span>
+                    </a>
+
+                </div>
+            </div>
+
+        </div>
+
+
+
+        <div class="tile_stats_count text-center" style="background: #41a5b9; color: white;">
+            <div class="right">
+                <span class="count_top"><i class="fa fa-user"></i> 90th
+                    Percentile</span>
+
+                <div class="count" style="font-size: 35px; text-align: center;">
+                    {{ t90_percentile ? t90_percentile : 'No Data' }} </div>
+
+            </div>
+        </div>
+
+        <div class="tile_stats_count text-center" style="background: #65cea7; color: white;">
+            <div class="right">
+                <span class="count_top"><i class="fa fa-clock"></i>Average Load Time</span>
+
+                <div class="count" style="font-size: 35px; text-align: center;">
+                    {{ average_loatTime ? (average_loatTime | number:'2.0-2') : 'No Data' }} </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+    <div style='width: 100%; position: relative;'>
+
+        <!-- ====Line Graph START====== -->
+        <!-- <div id="container1" class="col-md-12 col-sm-8 col-xs-12" style="height: 250px;"></div>
+        <div id='graphcover' class='col-md-12 col-sm-8 col-xs-12 graphloader' style='position: absolute'></div> -->
+
+
+        <!--  ================================== Line Graph End========================================================================== -->
+
+        <div style="height: 2px; background-color: rgb(182, 177, 177); margin: 10px 0;"></div>
+
+        <!-- your-component.component.html -->
+        <div style="position: absolute; margin: 0.7% 75%; width: 15%; font-size: 13px;">
+            <input type="checkbox" id="toggleChartPages" [(ngModel)]="showGraphData" (change)="toggleChartPages($event)"
+                style="position: relative; margin-bottom: 1%;" />
+            <label style="font-size: 11px; margin-left: 3%;">: Show/Hide Pages</label>
+        </div>
+
+
+    </div>
+
+    <br>
+
+
+
+
+
+    <div class="div" id="splineChartContainer" style="width: 100%; height: 100%; display: block;">
+    </div>
+
+
+
+    <div class="row">
+        <div class="col-md-5">
+            <div class="x_panel tile fixed_height_390 overflow_hidden" style="height: 50%; margin-top: 28px;">
+                <div id="container2">
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-7">
+            <br>
+            <div id="container12">`</div>
+        </div>
+
+    </div>
+
+
+</div>
+
+
+
+
+
+
+<!-- ErrorDetails Modal -->
+<div class="modal fade" #errorModal tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title fs-5" id="exampleModalLabel">Error Details :
+                    {{appName}}</h4>
+
+
+                <button type="button" class="btn-close" (click)="closeErrormodal()" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div style="max-height: 400px; overflow-y: auto;">
+                <table id="example" class="table table-striped responsive-utilities jambo_table">
+                    <thead>
+                        <tr class="bgco">
+                            <th style="width: 90px; text-align: center; text-wrap: nowrap; background-color: #ae275f;">
+                                Sr. No</th>
+                            <th style="width: 90px; text-align: center; text-wrap: nowrap; background-color: #ae275f;">
+                                Page Name</th>
+                            <th style="width: 90px; text-align: center; text-wrap: nowrap;background-color: #ae275f;">
+                                Error Occurred</th>
+                            <th style="width: 90px; text-align: center; text-wrap: nowrap;background-color: #ae275f;">
+                                Error Description</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- <tr data-ng-repeat="error in errorList "> -->
+
+                        <!-- <tr *ngFor="let error of errorlist; let i = index">
+                        <td style="color: black; text-align: center;">{{$index+1}}</td>
+                        <td style="color: black; text-align: center;">{{1}}</td>
+                        <td style="color: black; text-align: center;">{{12}}</td>
+                        <td style="color: black; text-align: center;">{{22}}</td>
+                        <td style="color: black; text-align: center;">{{22}}</td>
+                        <td style="color: black; text-align: center;" > -->
+                        <!-- data-ng-if="error.arr.length===0"> -->
+                        <!-- <div>NA</div> -->
+
+                        <!-- </td> -->
+                        <tr *ngFor="let error of errorlist; let i = index">
+                            <td style="color: black; text-align: center; font-size: small;">{{ i + 1 }}</td>
+                            <td style="color: black; text-align: center;  font-size: small;">{{ error[0] }}</td>
+                            <td style="color: black; text-align: center;  font-size: small;">{{ error[1] }}</td>
+                            <td style="color: black; text-align: center; font-size: small;">{{ error[2] }}</td>
+                        </tr>
+                       
+                        <div style="color: black; display: flex; align-items: center; justify-content: center;" *ngIf="!errorlist || errorlist.length === 0">
+                            <p>No data available.</p>
+                        </div>
+                    </tbody>
+                </table>
+
+              </div>
+            </div>
+            <!-- <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="closeErrormodal" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div> -->
+        </div>
+    </div>
+</div>
+
+
+
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="line-spin-fade" [fullScreen]="true">
+    <p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>
+
+
+
+
+

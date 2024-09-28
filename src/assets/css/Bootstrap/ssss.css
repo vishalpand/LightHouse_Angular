@@ -1,0 +1,141 @@
+.card-title {
+    text-align: center !important;
+    color: blue;
+        font-weight: 600;
+    /* margin-bottom: .75rem; */
+}
+.dashboard_wrap1{
+	 background: whitesmoke;
+}
+.project_details table tr th:not(:last-child){
+	padding-right: 4%;
+}
+.testdes{
+display: inline-block;
+text-align: center;
+}
+span.testcount:first-child{
+	
+}
+.testdes:not(:last-child){
+	margin-right: 15%;
+
+}
+.testcount{
+	color:#0078d4;
+}
+.testcount:not(:last-child){
+	margin-right: 24%;
+}
+.projetc_labels td{
+	font-size: 13px;
+}
+.project_name{
+  
+}
+.testdes{
+    padding: 7%;
+    font-weight: 600;
+    font-size: 12px;
+}
+.table_run tr:first-child{
+	text-align: center;
+
+}
+.table_run tr:first-child td:first-child{
+	background: #FFC107;
+    color: white;
+}
+.table_run tr:first-child td:last-child{
+	background: #08af08;
+    color: white;
+}
+.status{
+	    border-left: 2px solid #0078d4;
+}
+.donut_Project1,.Tacho_Project1{
+	padding-top: 5px;
+    padding-bottom: 4px;
+}
+.donut_Project1 h6,.Tacho_Project1 h6{
+	font-size: 12px;
+}
+.executed_status tr td{
+	font-size: 14px;
+}
+
+.table_run tr span{
+	font-weight: 400;
+}
+.project_row div:not(:last-child){
+	padding-right: 0px;
+} 
+.res_status tr td:first-child{
+	width: 3.2vw;
+	color: white;
+	text-align: center;
+}
+.res_status tr td:last-child{
+	    font-size: 11px;
+    background-color: white;
+    font-weight: 600;
+}
+.header_wrap{
+	margin-bottom: 6px;
+    background: #0078d4;
+    color: white;
+    margin-left: 1px;
+}
+.header_wrap span{
+	text-align: center;
+    display: block;
+}
+.project_row:not(:first-child){
+	margin-bottom: 6px;
+}
+.card {
+    font-size: 15px !important;
+         height: 34vh !important;
+}
+.card-auto {
+    font-size: 15px !important;
+    width: 265px !important;
+         height: 90spx !important;
+}
+    .card-body {
+    padding: 9px 10px;
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    /* padding: 1.25rem; */
+}
+.executed_status tr td {
+    font-size: 9px !important;
+    font-weight: 700;
+}
+.table_run tr td{
+	 font-size: 13px !important;
+    font-weight: 600;
+}
+.testDetails{
+	    width: 100% !important;
+	    margin-top: -22px;
+}
+.executed_status {
+	    margin-top: 3px !important;
+}
+.runSummary{
+	text-align: center;
+    font-size: 13px;
+    margin-bottom: 31px;
+        cursor: pointer;
+}
+.project_name {
+   
+    /* margin-bottom: 29%; */
+    text-align: center;
+    color: #4a0606;
+    text-decoration: underline;
+    cursor: pointer;
+    margin: 4px;
+}

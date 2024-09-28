@@ -1,0 +1,110 @@
+<div style="padding-top: 40px;">
+    <div class="summaryHeading">
+        <div class="form-container">
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="form-item">
+                        <label style="text-align: center;">Application</label>
+                        <select class="form-control down" [(ngModel)]="appName" >
+                            <option value="">Select</option>
+                        <option *ngFor="let application of applicationList" [value]="application">{{ application }}
+                        </option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="col-md-2">
+                    <div class="form-item">
+                        <label style="text-align: center;">Start Date</label>
+                        <input type="date" id="fromDate" class="form-control down" [max]="toDayDate" placeholder="yyyy-mm-dd" [(ngModel)]="startDate" required>
+                        <!-- <input type="time" id="startdatetime" class="form-control down" value="00:00" data-ng-model="startDateTime" step="1" data-ng-disabled="monthEnd" /> -->
+                    </div>
+                </div>
+
+
+                <div class="col-md-2">
+                    <div class="form-item">
+                        <label style="text-align: center;">Select Start Time</label>
+                        <!-- <input type="date" id="fromDate" class="form-control down" [max]="toDayDate" placeholder="yyyy-mm-dd" required> -->
+                        <input type="time" id="startdatetime" class="form-control down" value="00:00" [(ngModel)]="startTime" step="1" data-ng-disabled="monthEnd" />
+                    </div>
+                </div>
+
+
+                <div class="col-md-2">
+                    <div class="form-item">
+                        <label style="text-align: center;">End Date</label>
+                        <input type="date" id="fromDate" class="form-control down" placeholder="yyyy-mm-dd" [(ngModel)]="endDate" required>
+                        <!-- <input type="time" id="startdatetime" class="form-control down" value="00:00" data-ng-model="startDateTime" step="1" data-ng-disabled="monthEnd" /> -->
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="form-item">
+                        <label style="text-align: center;">Select End Time</label>
+                        <!-- <input type="date" id="fromDate" class="form-control down" placeholder="yyyy-mm-dd" required> -->
+                        <input type="time" id="startdatetime" class="form-control down" value="00:00" [(ngModel)]="endTime" step="1" data-ng-disabled="monthEnd" />
+                    </div>
+                </div>
+
+                
+                <div class="col-md-2">
+                    <div class="form-item">
+                        <label style="margin-bottom: 17px;"></label>
+                        <button type="button" class="btn btn-secondary btm-sm custom-btn" (click)="getSummary(appName,startDate,endDate,startTime,endTime)" style="background-color: #b80000; border-color:#b80000;">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+ <hr>
+    <div class="d-flex align-items-center justify-content-between mt-4 ">
+        <h4 class="mr-auto" style="margin-left: 5mm;">Summary Report</h4>
+        <div style="margin-right: 1cm;">
+
+            <button type="button" class="btn btn-secondary p-1 mx-5" (click)="exportTableToExcel('myTable')"
+                style="background-color: #b80000; border-color:#b80000 ">Download Report
+            </button>
+        </div>
+    </div>
+
+    <div style="margin-left: 3mm;margin-right:7mm">
+        <table id="myTable" class="summaryTbl">
+            <thead>
+                <tr>
+                    <th>Application Name</th>
+                    <th>Page Name</th>
+                    <th>Response Time</th>
+                    <th>Availability </th>
+                    <th>Error</th>  
+                    <th>Time</th>
+                   
+                </tr>
+            </thead>
+            <tbody>
+                <tr  *ngFor="let summarylist of getAllSummarylist;  let  i=index">
+                    <td>{{summarylist[0]}}</td>
+                    <td>{{summarylist[1]}}</td>
+                    <td>{{summarylist[2]}}</td>
+                    <td>{{summarylist[3]}}</td>
+                    <td>{{summarylist[4]}}</td>
+                    <td>{{summarylist[5]}}</td>
+                    <td>{{summarylist[6]}}</td>
+                </tr>
+
+                <tr *ngIf="!getAllSummarylist || getAllSummarylist.length === 0">
+                    <td colspan="12" class="text-center">
+                        <p style="color: #3c9b4e; margin: 0;">No data available..!!</p>
+                    </td>
+                </tr> 
+             
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="line-spin-fade" [fullScreen]="true">
+    <p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>

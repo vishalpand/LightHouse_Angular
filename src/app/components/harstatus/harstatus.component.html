@@ -1,0 +1,195 @@
+<div class="container" style="padding-top: 50px">
+  <div>
+    <div class="form-group d-flex mt-5 w-100">
+      <div  style="width: 15%"  class="m-1">
+        <label class="col-form-label"
+          >Application Name : </label
+        >
+      </div>
+      <div  style="width: 50%"  class="m-1">
+        <select
+          class="form-control"
+          [(ngModel)]="applicatiName"
+         
+        >
+          <option value="" disabled selected>---Select----</option>
+          <option
+            *ngFor="let application of applicationList"
+            [value]="application"
+          >
+            {{ application }}
+          </option>
+        </select>
+      </div>
+      &nbsp; &nbsp;
+
+      <div style="width: 25% " class="m-1">
+        <button
+          class="btn btn-danger "
+          (click)="getAllharData(applicatiName)"
+          
+        >
+          Get PageList
+        </button>
+      </div>
+    </div>
+
+    <div>
+      <br /><br />
+
+      <table class="statustable">
+        <thead>
+          <tr>
+            <th>Page Name</th>
+            <th>Flag Value</th>
+            <th>Operations</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let harstatus of harStatuslist; let i = index">
+            <td>{{ harstatus[1] }}</td>
+            <td>{{ harstatus[2] }}</td>
+            <td>
+              <button
+                class="btn btn-primary btn-sm"
+                data-bs-toggle="modal"
+                (click)="
+                  OpenUpdatemodal(harstatus[0], harstatus[1], harstatus[2])
+                "
+                data-bs-target="#harEdit"
+              >
+                Edit
+              </button>
+            </td>
+          </tr>
+
+          <tr *ngIf="!harStatuslist || harStatuslist.length === 0">
+            <td colspan="12" class="text-center">
+              <p style="color: #3c9b4e; margin: 0">No data available..!!</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ErrorDetails Modal -->
+  <div
+    class="modal fade"
+    #harEdit
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title fs-5" id="exampleModalLabel">
+            Edit HAR Status
+          </h4>
+          <button
+            type="button"
+            class="btn-close"
+            (click)="closeupadatemodal()"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <h3 style="color: green">{{ updateSuccess }}</h3>
+          <h3 style="color: red">{{ updateFail }}</h3>
+          <h2>Edit HAR Status Form</h2>
+          <br />
+
+          <div class="form-group">
+            <label
+              class="control-label col-sm-2"
+              style="font-weight: bold"
+              for="fullname1"
+              >Id</label
+            >
+            <div class="col-sm-10">
+              <input
+                type="text"
+                class="form-control"
+                id="id"
+                disabled
+                [(ngModel)]="id"
+                readonly="readonly"
+                required
+              />
+            </div>
+          </div>
+          <br />
+
+          <div class="form-group">
+            <label
+              class="control-label col-sm-2"
+              for="fullname1"
+              style="font-weight: bold"
+            >
+              Page Name
+            </label>
+            <div class="col-sm-10">
+              <input
+                type="text"
+                class="form-control"
+                id="page"
+                disabled
+                [(ngModel)]="page"
+                readonly="readonly"
+                required
+              />
+            </div>
+          </div>
+          <br />
+
+          <div class="form-group">
+            <label
+              class="control-label col-sm-2"
+              for="fullname1"
+              style="font-weight: bold"
+              >HAR Flag
+            </label>
+            <div class="col-sm-10">
+              <input
+                type="text"
+                class="form-control"
+                id="harflag"
+                [(ngModel)]="harflag"
+                required
+              />
+            </div>
+          </div>
+          <br />
+
+          <div class="info">
+            <small>
+              <p>
+                <strong>Info!</strong> ** HarFlag Value Should be "Y" or "N"
+                ..**
+              </p>
+            </small>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-primary"
+            (click)="updateHarstatusData()"
+          >
+            Update
+          </button>
+          <button
+            type="button"
+            class="btn btn-secondary"
+            (click)="closeupadatemodal()"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

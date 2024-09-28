@@ -1,0 +1,668 @@
+<br />
+
+<div>
+  <div class="reportErr_header d-flex">
+    <div class="dropdown inline">
+      <button
+        class="btn btn-danger dropdown-toggle rounded-0"
+        type="button"
+        id="dropdownMenuButton1"
+        data-bs-toggle="dropdown"
+        aria-haspopup="true"
+        aria-expanded="false"
+      >
+        Select Issue
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        <a
+          class="dropdown-item"
+          href="ApmosysAngularMonitoringPortal/Dashboard/report_error"
+          >Current Issue</a
+        >
+        <a
+          class="dropdown-item"
+          href="ApmosysAngularMonitoringPortal/Dashboard/solved_error"
+          >Skipped Issue</a
+        >
+        <a
+          class="dropdown-item"
+          href="ApmosysAngularMonitoringPortal/Dashboard/skipped_error"
+          >Solved Issue</a
+        >
+      </div>
+    </div>
+
+    <div class="ms-auto inline d-flex align-items-center">
+      <!-- Adjusted classes here -->
+      <label class="inline me-4" style="white-space: nowrap"
+        ><b>Application Name :</b></label
+      >
+      <select
+        class="inline form-select form-select-sm me-2"
+        [(ngModel)]="appName"
+        (ngModelChange)="getAllCurrentList(appName)"
+      >
+        <option value="all">All</option>
+        <option
+          *ngFor="let application of applicationList"
+          [value]="application"
+        >
+          {{ application }}
+        </option>
+      </select>
+    </div>
+  </div>
+
+  <div class="d-flex w-100">
+    <div class="d-flex mt-2 ms-3" style="width: 87%">
+      <label class="inline me-3 mt-2">Action :</label>
+      <select
+        class="form-select-sm inline me-4 p-2 border-light"
+        [(ngModel)]="isSkipAll"
+      >
+        <option value="false" selected disabled>---select---</option>
+        <option value="true">skip all</option>
+      </select>
+      <button class="btn btn-danger me-2" (click)="skipAllApplications()">
+        Submit
+      </button>
+    </div>
+
+    <div class="d-flex mt-2 ms-3" style="width: 13%">
+      <label class="inline me-3 mt-2">Show :</label>
+      <select
+        class="form-select-sm inline me-4 p-2 border-light"
+        (change)="onSelectChange($event)"
+      >
+        <option value="10" selected>10</option>
+        <option value="15">15</option>
+        <option value="20">20</option>
+      </select>
+    </div>
+  </div>
+
+  <div style="margin-left: 3mm; margin-right: 10px">
+    <table class="Report_errorTbl">
+      <thead>
+        <tr>
+          <th>
+            <input
+              class="form-check-input"
+              type="checkbox"
+              value=""
+              id="defaultCheck1"
+              [(ngModel)]="isSelectAll"
+              (click)="changeAll()"
+            />
+          </th>
+          <th>Application Name</th>
+          <th>Page Name</th>
+          <th>Start Date</th>
+          <th>Level</th>
+          <th>Error Description</th>
+          <th>Screenshot</th>
+          <th style="width: 15vw">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let currentall of getListForPagination; let i = index">
+          <td>
+            <input
+              type="checkbox"
+              value="{{ currentall[0] }}"
+              (change)="onChange(currentall[0])"
+              [checked]="isSelectAll"
+            />
+          </td>
+
+          <td style="color: black; text-align: left; vertical-align: middle">
+            {{ currentall[1] }}
+            <img
+              *ngIf="currentall[4] == '0' || currentall[4] == '1'"
+              src="assets/image/newicon.gif"
+              width="30px"
+              alt="New Image"
+            />
+            <img
+              *ngIf="currentall[4] > '1'"
+              src="assets/image/Escalate.png"
+              width="50px"
+              alt="Escalate Image"
+            />
+          </td>
+
+          <td>{{ currentall[2] }}</td>
+          <td>{{ currentall[3] }}</td>
+          <td>
+            <div class="btn-group">
+              <button
+                type="button"
+                id="level1"
+                class="btnlevel"
+                [class.success-active]="currentall[4] >= 1"
+                [class.basic-disabled]="currentall[4] < 1"
+              >
+                1
+              </button>
+              <button
+                type="button"
+                id="level2"
+                class="btnlevel"
+                [class.success-active]="currentall[4] >= 2"
+                [class.basic-disabled]="currentall[4] < 2"
+              >
+                2
+              </button>
+              <button
+                type="button"
+                id="level3"
+                class="btnlevel"
+                [class.success-active]="currentall[4] >= 3"
+                [class.basic-disabled]="currentall[4] < 3"
+              >
+                3
+              </button>
+              <button
+                type="button"
+                id="level3"
+                class="btnlevel"
+                [class.success-active]="currentall[4] >= 4"
+                [class.basic-disabled]="currentall[4] < 4"
+              >
+                4
+              </button>
+              <button
+                type="button"
+                id="level3"
+                class="btnlevel"
+                [class.success-active]="currentall[4] >= 5"
+                [class.basic-disabled]="currentall[4] < 5"
+              >
+                5
+              </button>
+              <button
+                type="button"
+                id="level3"
+                class="btnlevel"
+                [class.success-active]="currentall[4] >= 6"
+                [class.basic-disabled]="currentall[4] < 6"
+              >
+                6
+              </button>
+              <button
+                type="button"
+                id="level3"
+                class="btnlevel"
+                [class.success-active]="currentall[4] >= 7"
+                [class.basic-disabled]="currentall[4] < 7"
+              >
+                7
+              </button>
+            </div>
+          </td>
+          <td>{{ currentall[5] }}</td>
+          <td>
+            <i
+              class="fas fa-eye"
+              style="font-size: 20px"
+              (click)="getScreenShot(currentall[6])"
+            ></i>
+          </td>
+          <td>
+            <button
+              type="button"
+              class="btn btn-warning btn-sm"
+              (click)="
+                escalateModalOpen(
+                  currentall[1],
+                  currentall[4],
+                  currentall[2],
+                  currentall[3],
+                  currentall[7]
+                )
+              "
+            >
+              Escalate</button
+            ><button
+              type="button"
+              class="btn btn-info btn-sm"
+              (click)="skippedfunc(currentall[1], currentall[2])"
+            >
+              Skip</button
+            ><button
+              type="button"
+              class="btn btn-success btn-sm"
+              (click)="
+                solvedModalopen(
+                  currentall[1],
+                  currentall[4],
+                  currentall[2],
+                  currentall[3]
+                )
+              "
+            >
+            
+              Solved
+            </button>
+          </td>
+        </tr>
+
+        <tr *ngIf="!getallcurrentapplist || getallcurrentapplist.length === 0">
+          <td colspan="10" class="text-success">No Error Observed</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Pagination controls -->
+<div *ngIf="totalPages > 1" class="m-4 pl-4">
+  <ul class="pagination">
+    <li class="page-item" [class.disabled]="currentPage === 1">
+      <a class="page-link" (click)="onPageChange(currentPage - 1)">Previous</a>
+    </li>
+    <li
+      class="page-item"
+      *ngFor="let page of pageNumbers()"
+      [class.active]="currentPage === page"
+    >
+      <a class="page-link" (click)="onPageChange(page)">{{ page }}</a>
+    </li>
+    <li class="page-item" [class.disabled]="currentPage === totalPages">
+      <a class="page-link" (click)="onPageChange(currentPage + 1)">Next</a>
+    </li>
+  </ul>
+</div>
+
+<div
+  class="modal fade"
+  id="screenshotModal"
+  [ngClass]="{ show: isSreenshotmodal, fade: isSreenshotmodal }"
+  tabindex="-1"
+  role="dialog"
+  [ngStyle]="{ display: isSreenshotmodal ? 'block' : 'none' }"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4
+          class="modal-title"
+          style="margin-left: 5%; font-size: 25; /* font-weight: bold; */"
+        >
+          <span>Screenshot Preview </span>
+        </h4>
+        <button
+          type="button"
+          class="btn-close"
+          (click)="isCurrentclosemodal()"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-body">
+          <img [src]="screenshotUrl" alt="Screenshot" class="img-fluid" />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-warning"
+          (click)="isCurrentclosemodal()"
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================================================== -->
+<!--                     Escalate modal                    -->
+<!-- ===================================================== -->
+
+<div
+  class="modal fade"
+  id="escalatmodId"
+  [ngClass]="{ show: isescalateModalopen, fade: isescalateModalopen }"
+  tabindex="-1"
+  role="dialog"
+  [ngStyle]="{ display: isescalateModalopen ? 'block' : 'none' }"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" style="margin-left: 5%; font-size: 13px">
+          <span>Escalation Details </span>
+        </h4>
+        <button
+          type="button"
+          class="btn-close"
+          (click)="Escaltemodalclose()"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-body">
+          <h4>Levels :</h4>
+          <h6 style="margin-top: 15px; margin-bottom: 18px">
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="inlineRadioOptions"
+                id="inlineRadio1"
+                (click)="getLevelData($event)"
+                [(ngModel)]="selectedLevel"
+                disabled
+                value="1"
+              />
+              <label class="form-check-label" for="inlineRadio1">1</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="inlineRadioOptions"
+                id="inlineRadio2"
+                (click)="getLevelData($event)"
+                [(ngModel)]="selectedLevel"
+                disabled
+                value="2"
+              />
+              <label class="form-check-label" for="inlineRadio2">2</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="inlineRadioOptions"
+                (click)="getLevelData($event)"
+                id="inlineRadio3"
+                [(ngModel)]="selectedLevel"
+                disabled
+                value="3"
+              />
+              <label class="form-check-label" for="inlineRadio3">3</label>
+            </div>
+
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="inlineRadioOptions"
+                (click)="getLevelData($event)"
+                id="inlineRadio4"
+                [(ngModel)]="selectedLevel"
+                disabled
+                value="4"
+              />
+              <label class="form-check-label" for="inlineRadio4">4</label>
+            </div>
+
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="inlineRadioOptions"
+                id="inlineRadio5"
+                (click)="getLevelData($event)"
+                [(ngModel)]="selectedLevel"
+                disabled
+                value="5"
+              />
+              <label class="form-check-label" for="inlineRadio5">5</label>
+            </div>
+
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="inlineRadioOptions"
+                id="inlineRadio6"
+                (click)="getLevelData($event)"
+                [(ngModel)]="selectedLevel"
+                disabled
+                value="6"
+              />
+              <label class="form-check-label" for="inlineRadio6">6</label>
+            </div>
+
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="inlineRadioOptions"
+                id="inlineRadio7"
+                (click)="getLevelData($event)"
+                [(ngModel)]="selectedLevel"
+                disabled
+                value="7"
+              />
+              <label class="form-check-label" for="inlineRadio7">7</label>
+            </div>
+          </h6>
+
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Via:</label>
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="viaemal"
+              readonly
+              id="via"
+            />
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label"
+              >Contact Name:</label
+            >
+            <select
+              class="form-control"
+              name="conatactName"
+              id="conatact-id"
+              (change)="getEmailbytheUser($event)"
+            >
+              <option value="" disabled selected>---Select----</option>
+              <option [value]="i"
+                *ngFor="let contactName of emailInfo; let i = index"
+              >
+                {{ contactName[0] }}
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Email:</label>
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="selectedEmail"
+              readonly
+              id="e"
+            />
+            
+          </div>
+
+          <div class="form-group">
+            <label for="datetime-id" class="col-form-label"
+              >Escalation Date-Time:</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="currentDate"
+              readonly
+              id="datetime-id"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-warning"
+          (click)="emailmododalOpen()"
+        >
+          Escalate
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Solved modal -->
+<div
+  class="modal fade"
+  id="escalatmodId"
+  [ngClass]="{ show: isSovledmodalopen, fade: isSovledmodalopen }"
+  tabindex="-1"
+  role="dialog"
+  [ngStyle]="{ display: isSovledmodalopen ? 'block' : 'none' }"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" style="margin-left: 5%; font-size: 13px">
+          <span>Issue Solved</span>
+        </h4>
+        <button
+          type="button"
+          class="btn-close"
+          (click)="solvedModalclose()"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Via:</label>
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="viaemal"
+              id="recipient-name"
+              readonly
+            />
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label"
+              >Reported To:</label
+            >
+            <select
+            class="form-control"
+            name="conatactName"
+            id="conatact-id"
+            (change)="getEmailbytheUser($event)"
+            
+          >
+            <option value="" disabled selected>---Select----</option>
+            <option
+              *ngFor="let contactName of emailInfo; let i = index"
+              [value]="i"
+            >
+              {{ contactName[0] }}
+            </option>
+          </select>
+
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label"
+              >Solved Date-Time:</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="currentDate"
+              id="recipient-name"
+              readonly
+            />
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-success"
+          (click)="emailmododalOpen()"
+        >
+          Proceed
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Email Model -->
+<!-- ================================================================================== -->
+
+<div
+  class="modal fade"
+  id="sentMailId"
+  [ngClass]="{ show: isEmailmodalopen, fade: isEmailmodalopen }"
+  tabindex="-1"
+  role="dialog"
+  [ngStyle]="{ display: isEmailmodalopen ? 'block' : 'none' }"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" style="margin-left: 5%; font-size: 13px">
+          <span>Email</span>
+        </h4>
+        <button
+          type="button"
+          class="btn-close"
+          (click)="emailmododalclose()"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">To</label>
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="selectedEmail"
+              readonly
+              id="recipient-name"
+            />
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">CC</label>
+
+            <textarea class="form-control" name="ccDetails" readonly id="cc-id" style="min-height: 100px;">
+             {{ ccMail }}
+            </textarea>
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Subject</label>
+            <input type="text" class="form-control" id="recipient-name" [(ngModel)]="subject"/>
+          </div>
+
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">Body</label>
+            <textarea class="form-control" id="message-text" [(ngModel)]="body"></textarea>
+          </div>
+
+          <div class="form-group">
+           
+            <label for="file" class="col-form-label">Upload File:</label>
+            <input
+              type="file"
+              class="form-control-file"
+              id="file"
+              name="file"
+              (change)="onFileSelected($event)"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" (click)="saveEmailData()">
+          Send
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
